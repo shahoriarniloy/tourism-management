@@ -1,4 +1,5 @@
 
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import TopDestinations from "@/components/TopDestinations";
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero/>   
       <TopDestinations/> 
       <TopResorts/>  
+      <Footer/>
       
     </div>
   );

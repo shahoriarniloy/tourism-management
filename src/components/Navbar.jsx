@@ -80,7 +80,7 @@ const Navbar = () => {
         >
           <Link
             href="/join"
-            className="px-6 py-2 rounded-md border-2 transition duration-300 hover:bg-sky-900 hover:scale-105"
+            className="px-6 py-2 rounded-md border-2 transition duration-300 hover:bg-sky-500 hover:text-white hover:scale-105"
           >
             Join Us
           </Link>
