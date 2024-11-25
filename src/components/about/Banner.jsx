@@ -6,10 +6,10 @@ const Banner = () => {
   <div
     className="w-full h-40 text-center flex flex-col items-center justify-center"
     style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/images/about/aboutBg.jpg)`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(/images/about/aboutBg.jpg)`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      color: '#fff', // Optional: Makes text white for better visibility
+      color: '#fff', 
     }}
   >
                <h2 className='text-4xl font-bold '>About</h2>
