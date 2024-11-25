@@ -25,7 +25,7 @@ function TopDestinations() {
   ];
 
   return (
-    <section className="py-16 ">
+    <section className="pt-16 ">
       <div className="text-center mb-12 px-4">
         <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight text-black ">
           Top Destinations
