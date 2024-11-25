@@ -65,7 +65,7 @@ const Hero = () => {
           Discover hidden gems and popular spots with our curated travel guides.
         </p>
 
-        <div className="mt-8 flex  items-center">
+        <div className="mt-8 flex justify-center items-center">
           <input
             type="text"
             placeholder="Search for destinations, guides, or activities..."
