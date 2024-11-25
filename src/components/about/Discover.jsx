@@ -70,12 +70,12 @@ export default function Discover() {
                     {/* Description */}
                     <div className="col-span-1 flex flex-col justify-center text-gray-800">
             <p className="text-base pt-5">
-              At Tourium, we&apos;re passionate about crafting journeys that go
+              At Tourism, we&apos;re passionate about crafting journeys that go
               beyond the ordinary, connecting travelers to breathtaking places
               and unique cultures with every adventure. Our mission is to make
               travel accessible and exciting for everyone, offering guided
               experiences that create unforgettable memories across the globe.
-              Founded on a passion for travel, Tourium is here to make every
+              Founded on a passion for travel, Tourism is here to make every
               journey inspiring, fulfilling, and uniquely yours.
             </p>
           </div>
