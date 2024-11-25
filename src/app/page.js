@@ -12,8 +12,13 @@ export default function Home() {
     <div >
       <Navbar/>
       <Hero/>   
+
+      <div className="lg:px-16">
       <TopDestinations/> 
-      <TopResorts/>  
+      <TopResorts/>
+
+      </div>
+        
       <Footer/>
       
     </div>

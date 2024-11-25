@@ -45,8 +45,8 @@ function TopDestinations() {
               <Image
                 src={destination.image}
                 alt={destination.title}
-                width={500}
-                height={300}
+                width={600}
+                height={600}
                 className="h-full w-full scale-105 group-hover:scale-100 rounded-lg object-cover transition-all duration-300"
               />
             </figure>
