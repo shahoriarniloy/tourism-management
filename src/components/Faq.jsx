@@ -45,7 +45,7 @@ const TourismSupport = () => {
   };
 
   return (
-    <div className="mt-12 pt-12">
+    <div className="mt-12 pt-12 px-4">
       <div className="flex justify-between flex-col md:flex-row max-w-[1280px] mx-auto gap-16">
         <div style={{ flex: 1 }}>
           <Image
