@@ -2,6 +2,7 @@
 import React from "react";
 import CountUp from "react-countup";
 import Image from "next/image";
+import { TypeAnimation } from 'react-type-animation';
 import {
   SliderBtnGroup,
   ProgressSlider,
@@ -57,21 +58,21 @@ const Hero = () => {
       </ProgressSlider>
       <div className="absolute inset-0 bg-black/50 z-5"></div>
 
-      <div className="text-center z-10 px-4 md:px-8 ">
+      <div className="text-center z-10 px-4 md:px-8">
         <h1 className="lg:text-5xl md:text-6xl text-3xl font-bold leading-tight mb-4">
           Explore the World’s Best Destinations
         </h1>
-        <p className="lg:text-xl md:text-xl text-sm font-thin  mb-6 text-gray-200">
+        <p className="lg:text-xl md:text-xl text-sm font-thin mb-6 text-gray-200">
           Discover hidden gems and popular spots with our curated travel guides.
         </p>
 
-        <div className="mt-8 flex justify-center items-center">
+        <div className="mt-8 flex justify-center items-center space-x-2">
           <input
             type="text"
-            placeholder="Search for destinations, guides, or activities..."
+            placeholder="Search destinations..."
             className="w-full max-w-md px-4 py-3 rounded-lg bg-white text-gray-800 placeholder-gray-500 shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
-          <button className="ml-1 h-full px-6 py-3 bg-sky-500 text-white rounded-lg">
+          <button className="h-full px-6 py-3 bg-sky-500 text-white rounded-lg">
             Search
           </button>
         </div>

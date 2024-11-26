@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .animated-text {
+    background: radial-gradient(
+      circle at var(--text-mouse-x) var(--text-mouse-y),
+      var(--gradient-text-center) 0%,
+      var(--gradient-text-edge) 40%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+
+.logo-container {
+  display: inline-block;
+}
+
+.shimmer-border {
+  position: relative;
+  border-image: linear-gradient(90deg, #0ea5e9, #ffffff, #0ea5e9) 1;
+  animation: shimmer 2s infinite;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+@keyframes shimmer {
+  0% {
+      border-image: linear-gradient(90deg, #0ea5e9, #ffffff, #0ea5e9) 1;
+  }
+  50% {
+      border-image: linear-gradient(90deg, #ffffff, #0ea5e9, #ffffff) 1;
+  }
+  100% {
+      border-image: linear-gradient(90deg, #0ea5e9, #ffffff, #0ea5e9) 1;
+  }
+}
