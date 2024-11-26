@@ -4,13 +4,13 @@ import React from 'react';
 const TeamSection = () => {
   const teamMembers = [
     {
-      name: 'Niloy Ahmed',
+      name: 'Shahoriar Azad Niloy',
       role: 'Founder & Director',
       image: '/images/about/1.JPG',
       socialLinks: {},
     },
     {
-      name: 'Avedesh',
+      name: 'Devesh Biswas',
       role: 'Chief Operating Officer',
       image: '/images/about/1.JPG',
       socialLinks: {},

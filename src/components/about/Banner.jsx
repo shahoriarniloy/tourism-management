@@ -2,9 +2,9 @@ import React from 'react';
 
 const Banner = () => {
     return (
-<div className="mt-12">
+<div className="">
   <div
-    className="w-full h-40 text-center flex flex-col items-center justify-center"
+    className="w-full h-48 text-center flex flex-col items-center justify-center"
     style={{
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(/images/about/aboutBg.jpg)`,
       backgroundSize: 'cover',
