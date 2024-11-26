@@ -3,9 +3,8 @@ import React from 'react'
 
 export default function AboutUs() {
   return (
-    <div className='bg-bg-1 py-10' >
+    <div className='py-10' >
 <div className='max-w-[1280px] flex flex-col md:flex-row justify-between mx-auto gap-8' style={{ display: 'flex', alignItems: 'center', padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-          {/* Left Image Section */}
           <div >
         <Image
          style={{
@@ -22,9 +21,8 @@ export default function AboutUs() {
 
       </div>
 
-      {/* Right Text Section */}
       <div style={{ flex: 1, marginLeft: '20px' }}>
-        <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>About Us</h2>
+        <h2 className='text-4xl lg:text-5xl font-extrabold leading-tight text-black'>About Us</h2>
         <p style={{ fontSize: '16px', lineHeight: '1.6', marginBottom: '16px' }}>
           Our tour agency offers unique and exciting travel experiences for individuals and groups. With a focus on
           adventure, culture, and sustainable tourism, we strive to create unforgettable memories for our clients.
@@ -36,10 +34,9 @@ export default function AboutUs() {
           journey that will broaden your horizons and leave you feeling inspired.
         </p>
         <button
-        className='hover:bg-bg-1'
+        className='bg-sky-500 hover:bg-sky-600'
           style={{
             padding: '10px 20px',
-            backgroundColor: '#a0765c',
             color: 'white',
             border: 'none',
             borderRadius: '4px',

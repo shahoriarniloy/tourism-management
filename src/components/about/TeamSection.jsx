@@ -31,66 +31,56 @@ const TeamSection = () => {
         linkedin: 'https://linkedin.com',
       },
     },
-
   ];
 
   return (
+    <div className="py-10">
+      <div className="w-full lg:px-32 mx-auto text-center">
+        <h4 className="text-4xl lg:text-5xl font-extrabold leading-tight text-black">
+          Team
+        </h4>
+        <h2 className="text-2xl lg:text-3xl font-semibold my-4">Our Amazing Team</h2>
 
-    <div className=' bg-bg-1 py-10'>
-    <div className='max-w-[1380px] mx-auto' style={{ textAlign: 'center', padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      {/* Section Header */}
-      <h4 className='text-xl' style={{ color: 'red', marginBottom: '10px' }}>Team</h4>
-      <h2 style={{ fontSize: '32px', marginBottom: '20px' }}>Our Amazing Team</h2>
+        <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1 gap-8">
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              className=" w-full text-center bg-white shadow-lg rounded-lg p-4"
+            >
+              <div className="w-full h-auto mb-4">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={924}
+                  height={1087}
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">{member.name}</h3>
+              <p className="text-sm text-gray-600 mb-4">{member.role}</p>
 
-      {/* Team Members */}
-      <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '20px' }}>
-        {teamMembers.map((member, index) => (
-          <div
-            key={index}
-            style={{
-              maxWidth: '200px',
-              textAlign: 'center',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              padding: '10px',
-            }}
-          >
-            <Image
-   
-              src={member.image}
-              alt={member.name}
-              width={924}
-              height={1087}
-              style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '10px', borderTopRightRadius: '20%' }}
-            />
-            <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{member.name}</h3>
-            <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>{member.role}</p>
-
-            {/* Social Links */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-              {member.socialLinks.facebook && (
-                <a href={member.socialLinks.facebook} target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-facebook" style={{ color: '#4267B2', fontSize: '16px' }}></i>
-                </a>
-              )}
-              {member.socialLinks.twitter && (
-                <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-twitter" style={{ color: '#1DA1F2', fontSize: '16px' }}></i>
-                </a>
-              )}
-              {member.socialLinks.linkedin && (
-                <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-linkedin" style={{ color: '#0077B5', fontSize: '16px' }}></i>
-                </a>
-              )}
+              <div className="flex justify-center gap-4">
+                {member.socialLinks.facebook && (
+                  <a href={member.socialLinks.facebook} target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-facebook text-blue-600 text-lg"></i>
+                  </a>
+                )}
+                {member.socialLinks.twitter && (
+                  <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-twitter text-blue-400 text-lg"></i>
+                  </a>
+                )}
+                {member.socialLinks.linkedin && (
+                  <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-linkedin text-blue-700 text-lg"></i>
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
-    </div>
-
   );
 };
 

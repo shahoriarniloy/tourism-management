@@ -12,9 +12,11 @@ export default function About() {
         <Banner />
         <Discover />
         <AboutUs />
-        <TeamSection />
-        <ImageCard />
         <TravelPhilosophySection />
+        <ImageCard />
+
+        <TeamSection />
+
       </div>
     
   )

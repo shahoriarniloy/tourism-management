@@ -5,27 +5,24 @@ export default function Discover() {
   return (
     <div>
         
-        <section className="bg-bg-1 pt-16 pb-8">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header Section */}
+        <section className=" pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h4 className="text-lg italic text-gray-700 mb-2">About Us</h4>
-          <h2 className="text-4xl font-bold text-gray-900">Discover Our Journey</h2>
+          <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-black">Discover Our Journey</h2>
           <p className="text-gray-600 mt-4">
             Passionate about creating memorable travel experiences, we bring the
             world’s best destinations closer to you.
           </p>
         </div>
 
-        {/* Vision and Mission Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Vision */}
+        <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6 w-full">
           <div 
            style={{
       
                 borderTopRightRadius: '33%',
               }}
-               className="bg-[#d4eff3] rounded-lg p-8 flex items-start">
+               className="bg-sky-100 rounded-lg p-8 flex items-start ">
             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md mr-6">
               <span className="text-gray-600 text-xl">✈️</span>
             </div>
@@ -39,15 +36,14 @@ export default function Discover() {
             </div>
           </div>
 
-          {/* Mission */}
           <div 
           style={{
       
             borderTopRightRadius: '33%',
           }}
-          className="bg-[#d4eff3] rounded-lg p-8 flex items-start">
+          className="bg-sky-100 rounded-lg p-8 flex items-start">
             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md mr-6">
-              <span className="text-gray-600 text-xl">❤️</span>
+              <span className="text-gray-600 text-lg">❤️</span>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -62,22 +58,18 @@ export default function Discover() {
       </div>
     </section>
 
-{/* image section */}
 
     <div>
 
     </div>
 
-    <section className="bg-[#eaf9fc] pb-16">
+    <section className=" pb-16">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Image Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Image 1 */}
           <div className="rounded-lg overflow-hidden">
           <Image 
           className="" style={{ borderTopRightRadius: '12%' }}
           height={834} width={957} alt='1' src={`/images/about/about1.jpg`}  />
-                    {/* Description */}
                     <div className="col-span-1 flex flex-col justify-center text-gray-800">
             <p className="text-base pt-5">
               At Tourism, we&apos;re passionate about crafting journeys that go
@@ -90,7 +82,6 @@ export default function Discover() {
             </p>
           </div>
 
-        {/* Stats Section */}
         <div  className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center pt-7">
           <div 
           style={{
@@ -125,7 +116,6 @@ export default function Discover() {
 
 
 
-          {/* Image 2 */}
           <div  className="rounded-lg overflow-hidden h-[770px]" style={{ borderTopRightRadius: '12%' }}>
   <Image 
   className='rounded-tr-3xl'
