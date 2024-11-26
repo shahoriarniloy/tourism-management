@@ -20,7 +20,12 @@ export default function Discover() {
         {/* Vision and Mission Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Vision */}
-          <div className="bg-[#d4eff3] rounded-lg p-8 flex items-start">
+          <div 
+           style={{
+      
+                borderTopRightRadius: '33%',
+              }}
+               className="bg-[#d4eff3] rounded-lg p-8 flex items-start">
             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md mr-6">
               <span className="text-gray-600 text-xl">✈️</span>
             </div>
@@ -35,7 +40,12 @@ export default function Discover() {
           </div>
 
           {/* Mission */}
-          <div className="bg-[#d4eff3] rounded-lg p-8 flex items-start">
+          <div 
+          style={{
+      
+            borderTopRightRadius: '33%',
+          }}
+          className="bg-[#d4eff3] rounded-lg p-8 flex items-start">
             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md mr-6">
               <span className="text-gray-600 text-xl">❤️</span>
             </div>
@@ -81,16 +91,31 @@ export default function Discover() {
           </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center pt-7">
-          <div className="bg-[#d4eff3] py-6 rounded-lg">
+        <div  className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center pt-7">
+          <div 
+          style={{
+      
+            borderTopRightRadius: '33%',
+          }}
+          className="bg-[#d4eff3] py-6 rounded-lg">
             <h3 className="text-4xl font-bold text-gray-900">90%</h3>
             <p className="text-lg text-gray-700 mt-2">Happy Client</p>
           </div>
-          <div className="bg-[#d4eff3] py-6 rounded-lg">
+          <div 
+          style={{
+      
+            borderTopRightRadius: '33%',
+          }}
+          className="bg-[#d4eff3] py-6 rounded-lg">
             <h3 className="text-4xl font-bold text-gray-900">5k+</h3>
             <p className="text-lg text-gray-700 mt-2">Active Member</p>
           </div>
-          <div className="bg-[#d4eff3] py-6 rounded-lg">
+          <div 
+          style={{
+      
+            borderTopRightRadius: '33%',
+          }}
+          className="bg-[#d4eff3] py-6 rounded-lg">
             <h3 className="text-4xl font-bold text-gray-900">15+</h3>
             <p className="text-lg text-gray-700 mt-2">Years Experience</p>
           </div>

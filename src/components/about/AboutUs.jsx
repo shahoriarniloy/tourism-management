@@ -8,6 +8,10 @@ export default function AboutUs() {
           {/* Left Image Section */}
           <div >
         <Image
+         style={{
+
+          borderTopRightRadius: '12%',
+        }}
           src="/images/about/about4.jpg"
           alt="Hot air balloons over rock formations"
           width={447}

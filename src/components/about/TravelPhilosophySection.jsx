@@ -3,21 +3,21 @@ import React from 'react';
 
 const TravelPhilosophySection = () => {
   return (
-    <div
-      className="bg-bg-1"
-      style={{
-        padding: '40px',
-        fontFamily: 'Arial, sans-serif',
-        backgroundImage: 'url(/images/about/Asset-2.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        position: 'relative',
-        height: 'auto', // Automatically adjust height based on content
-        minHeight: '100vh', // Ensure it takes full viewport height but no extra space
-        overflow: 'hidden', // Prevent extra space caused by overflowing elements
-      }}
-    >
+<div
+  className="bg-bg-1"
+  style={{
+    padding: '40px',
+    fontFamily: 'Arial, sans-serif',
+    backgroundImage: 'url(/images/about/Asset-2.png)', 
+    backgroundSize: 'contain', 
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat', 
+    position: 'relative',
+    width: '100%', 
+    height: 'auto', 
+    minHeight: '100vh', 
+  }}
+>
       {/* Content */}
       <div className="mx-auto max-w-[1380px]">
         <div

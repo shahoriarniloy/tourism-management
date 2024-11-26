@@ -57,11 +57,12 @@ const TeamSection = () => {
             }}
           >
             <Image
+   
               src={member.image}
               alt={member.name}
               width={924}
               height={1087}
-              style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '10px' }}
+              style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '10px', borderTopRightRadius: '20%' }}
             />
             <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{member.name}</h3>
             <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>{member.role}</p>

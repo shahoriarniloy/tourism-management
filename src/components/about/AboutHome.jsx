@@ -4,6 +4,7 @@ import Discover from './Discover'
 import AboutUs from './AboutUs'
 import TeamSection from './TeamSection'
 import TravelPhilosophySection from './TravelPhilosophySection'
+import ImageCard from './ImageCard'
 
 export default function About() {
   return (
@@ -12,6 +13,7 @@ export default function About() {
         <Discover />
         <AboutUs />
         <TeamSection />
+        <ImageCard />
         <TravelPhilosophySection />
       </div>
     
