@@ -8,16 +8,14 @@ import {destinationsServices} from '../lib/destinationsServices'
 const getDestinations = async () => { 
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/destinationsServices/api/get-all`)
-  const destinations = res.json();
-  return destinations;
+  const data = await res.json();
+  return data?.destinations;
 
 }
 
 const Destinations = async () => {
    
-const destinations =await getDestinations();
-
-console.log(destinations);
+const destinations =await getDestinations() || [];
 
   return (
     <section className="py-16 max-w-[1380px] mx-auto">
@@ -32,14 +30,14 @@ console.log(destinations);
       </div>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-12 lg:px-16 md:px-8 px-4">
-        {destinationsServices.map((destination, index) => (
+        {destinations?.map((destination, index) => (
           <div
             key={index}
             className="relative  h-[400px] group mx-auto dark:bg-black bg-white dark:border-0 border overflow-hidden rounded-md dark:text-white text-black w-full sm:w-[400px] shadow-lg hover:shadow-2xl transition-shadow duration-300"
           >
             <figure className="w-full h-full rounded-md overflow-hidden">
               <Image
-                src={destination.image}
+                src={destination.photoURL1}
                 alt={destination.title}
                 width={400}
                 height={400}

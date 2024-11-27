@@ -12,6 +12,8 @@ const Navbar = () => {
   const pathName = usePathname();
   const session = useSession();
 
+
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -96,6 +98,14 @@ const Navbar = () => {
             }`}
           >
             About
+          </Link>
+          <Link
+            href="/addDestinations"
+            className={`text-lg hover:text-sky-500 transition duration-300 ${
+              pathName === "/addDestinations" ? "font-bold" : ""
+            }`}
+          >
+            addDestinations
           </Link>
         </div>
 
