@@ -3,7 +3,8 @@ import React from 'react';
 
 const Logo = () => {
     return (
-        <div className="logo-container">
+        <div className='border-t-2 rounded-t-full w-fit '>
+            <div className="logo-container">
             <Link href="/">
                 <span className="text-gradient border-b-2 shimmer-border border-t-rounded-full">
                     <span className="text-lg">T</span>
@@ -18,6 +19,7 @@ const Logo = () => {
                     <span className="text-xl text-sky-500">s</span>
                 </span>
             </Link>
+        </div>
         </div>
     );
 };
