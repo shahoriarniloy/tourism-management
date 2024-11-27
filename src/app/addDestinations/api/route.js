@@ -6,7 +6,7 @@ export const POST = async (req) => {
   const destinationsCollection = await db.collection("destinations");
 
   try {
-    const body = await req.json(); // Parse the request body
+    const body = await req.json(); 
     const result = await destinationsCollection.insertOne(body);
 
     return NextResponse.json(

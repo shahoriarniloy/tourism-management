@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import SocialSignIn from "@/components/SocialSignIn";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/24/outline'; 
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Autosuggest from 'react-autosuggest'; 
 
 const ResortManagerRegister = () => {
   const router = useRouter();
@@ -13,6 +13,8 @@ const ResortManagerRegister = () => {
     password: false,
     confirmPassword: false,
   });
+  const [countrySuggestions, setCountrySuggestions] = useState([]); 
+  const [location, setLocation] = useState(""); 
 
   useEffect(() => {
     setIsMounted(true);
@@ -26,7 +28,7 @@ const ResortManagerRegister = () => {
       email: event.target.email.value,
       password: event.target.password.value,
       resortName: event.target["resort-name"].value,
-      location: event.target.location.value,
+      location: location, 
       phone: event.target.phone.value,
       userType: "resortManager",
     };
@@ -57,6 +59,49 @@ const ResortManagerRegister = () => {
       ...prev,
       [field]: !prev[field],
     }));
+  };
+
+  const onLocationChange = (event, { newValue }) => {
+    setLocation(newValue);
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    if (value.trim() === "") {
+      setCountrySuggestions([]);
+      return;
+    }
+
+    fetch(`https://restcountries.com/v3.1/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        const filteredCountries = data
+          .map((country) => country.name.common)
+          .filter((country) => country.toLowerCase().includes(value.toLowerCase()));
+        setCountrySuggestions(filteredCountries);
+      });
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setCountrySuggestions([]);
+  };
+
+  const inputProps = {
+    placeholder: "Type country...",
+    value: location,
+    onChange: onLocationChange,
+  };
+
+  const suggestionContainerStyles = {
+    maxHeight: "50px", 
+    position: "absolute",  
+    zIndex: 10,            
+    backgroundColor: "white",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+    width: "100%",         
+  };
+
+  const theme = {
+    suggestionsContainer: 'custom-suggestions-container',
   };
 
   if (!isMounted) {
@@ -131,9 +176,9 @@ const ResortManagerRegister = () => {
                   className="absolute inset-y-0 right-2 flex items-center"
                 >
                   {showPassword.password ? (
-                    <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                    <FaEyeSlash className="h-5 w-5 text-gray-500" />
                   ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-500" />
+                    <FaEye className="h-5 w-5 text-gray-500" />
                   )}
                 </button>
               </div>
@@ -159,9 +204,9 @@ const ResortManagerRegister = () => {
                   className="absolute inset-y-0 right-2 flex items-center"
                 >
                   {showPassword.confirmPassword ? (
-                    <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                    <FaEyeSlash className="h-5 w-5 text-gray-500" />
                   ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-500" />
+                    <FaEye className="h-5 w-5 text-gray-500" />
                   )}
                 </button>
               </div>
@@ -190,12 +235,18 @@ const ResortManagerRegister = () => {
               >
                 Country
               </label>
-              <input
-                type="text"
-                id="location"
-                placeholder="Bangladesh"
-                required
-                className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              <Autosuggest
+                suggestions={countrySuggestions}
+                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={(suggestion) => suggestion}
+                renderSuggestion={(suggestion) => <div>{suggestion}</div>}
+                inputProps={{
+                  ...inputProps,
+                  className: "w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none",
+                }}
+                theme={theme}
+                suggestionsContainerStyle={suggestionContainerStyles} // Apply the styles here
               />
             </div>
             <div>
@@ -221,7 +272,6 @@ const ResortManagerRegister = () => {
             Register
           </button>
         </form>
-        
       </div>
     </div>
   );

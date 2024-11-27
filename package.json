@@ -20,7 +20,7 @@
     "mongodb": "^6.11.0",
     "next": "15.0.3",
     "next-auth": "^4.24.10",
-    "react": "19.0.0-rc-66855b96-20241106",
+    "react": "^18.3.1",
     "react-autosuggest": "^10.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^18.3.1",

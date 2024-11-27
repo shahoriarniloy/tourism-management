@@ -32,7 +32,6 @@ const {data:session} = useSession()
         }
        
         
-        // send data to the server
         fetch( `${process.env.NEXT_PUBLIC_API_URL}/addDestinations/api`, {
         method: 'POST',
         headers: {
@@ -64,21 +63,15 @@ const {data:session} = useSession()
         }
         
 
-
     return (
-        <div className="px-4 md:px-0 my-12 max-w-[1280px] mx-auto">
+        <div className="px-4 md:px-0 my-12 max-w-[1280px] mx-auto ">
 
           <div className=" mx-auto">
-            <div className="text-center my-12 px-10 py-7 lg:px-28 lg:py-16 bg-[#eaeaea] lg:w-4/4 rounded-md mx-auto">
+            <div className="text-center my-12 px-10 py-7 lg:px-28 lg:py-16 lg:w-4/4 rounded-md mx-auto">
               <h2 className="text-5xl pb-7 text-black font-extrabold">
                 Add a New Tourist Spot
               </h2>
-              <p className="text-base leading-7 font-semibold text-black pb-5 w-2/3 mx-auto">
-                Experience the allure of our newest tourist spot! Discover
-                breathtaking landscapes, vibrant cultures, and unforgettable
-                adventures. Join us on an exploration filled with wonder and
-                excitement.
-              </p>
+              
               <form 
               onSubmit={handleAddSpot}
               className="grid grid-cols-1 md:grid-cols-2 gap-6  mx-auto">
@@ -261,7 +254,7 @@ const {data:session} = useSession()
                     type="submit"
                    
                     value="Add Tourist Spot "
-                    className="btn w-full bg-orange-600 text-base text-white border-0 rounded-md border-[#331A15]"
+                    className="btn w-full bg-sky-500 text-base text-white border-0 rounded-md border-[#331A15]"
                   />
                 </div>
               </form>
