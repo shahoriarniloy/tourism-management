@@ -37,8 +37,8 @@ const destinations =await getDestinations() || [];
           >
             <figure className="w-full h-full rounded-md overflow-hidden">
               <Image
-                src={destination.photoURL1}
-                alt={destination.title}
+                src={destination?.photoURL1}
+                alt={destination?.name}
                 width={400}
                 height={400}
                 className="h-full w-full scale-105 group-hover:scale-100 rounded-lg object-cover transition-all duration-300"
@@ -47,13 +47,13 @@ const destinations =await getDestinations() || [];
             <div className="absolute top-0 left-0 w-full h-full transition-all duration-300 bg-gradient-to-b from-[#2b2f3325] via-[#2832365b] to-[#0a52be] opacity-45"></div>
             <article className="p-4 space-y-2 absolute -bottom-10 group-hover:bottom-0 transition-all duration-300">
               <h1 className="text-xl lg:text-2xl font-semibold capitalize">
-                {destination.title}
+                {destination?.title}
               </h1>
               <p className="text-sm lg:text-base text-white">
-                {destination.description}
+                {destination?.description}
               </p>
               <p className="text-sm lg:text-xl font-bold text-[#73D0EA]">
-               Price : {destination.average}$
+               Price : {destination?.average}$
               </p>
               <a
                 href="#"
