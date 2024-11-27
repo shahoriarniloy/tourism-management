@@ -2,6 +2,8 @@ import { connectDB } from "@/lib/connectDB";
 import NextAuth from "next-auth";
 import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+// import FacebookProvider from "next-auth/providers/facebook";
 
 const handler = NextAuth({
     session: {
@@ -36,15 +38,25 @@ const handler = NextAuth({
                 }
             },
         }),
+        GoogleProvider({
+            clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
+          }),
+        //   FacebookProvider({
+        //     clientId: process.env.FACEBOOK_CLIENT_ID,
+        //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+        //   })
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, account }) {
             if (user) {
-                token.id = user.id;
-                token.email = user.email;
+                token.id = user.id || token.id;
+                token.email = user.email || token.email;
             }
+        
             return token;
         },
+        
         async session({ session, token }) {
             if (token) {
                 session.user = {
