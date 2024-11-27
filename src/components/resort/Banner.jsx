@@ -5,11 +5,9 @@ import { usePathname } from 'next/navigation';
 const Banner = () => {
   const pathName = usePathname();
 
-  // Split the pathname by slashes, capitalize the first letter of each part, then join back
   const formattedPathName = pathName
     .split('/')
     .map((part, index) => {
-      // Capitalize first letter of each part
       if (part) {
         return part.charAt(0).toUpperCase() + part.slice(1);
       }
@@ -22,8 +20,10 @@ const Banner = () => {
       <div
         className="w-full h-48 text-center flex flex-col items-center justify-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(/images/resort/resort_bg.jpeg)`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://i.ibb.co/VjvRgFd/climate-landscape-paradise-hotel-sunset-1.jpg)`,
           backgroundSize: 'cover',
+          backgroundPosition: "center",  
+
           backgroundRepeat: 'no-repeat',
           color: '#fff',
         }}

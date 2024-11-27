@@ -49,24 +49,32 @@ const handler = NextAuth({
         //   })
     ],
     callbacks: {
-        async jwt({ token, user, account }) {
-            if (user) {
-                token.id = user.id || token.id;
-                token.email = user.email || token.email;
+        async signIn({ user, account }) {
+            if(account.provider === 'google') {
+                console.log("Google user info:", user);
+                const { email, name, image } = user;
+    
+                try {
+                    const db = await connectDB(); // Ensure awaiting the connection
+                    const userCollection = db.collection('users');
+                    const userExist = await userCollection.findOne({ email });
+    
+                    if (!userExist) {
+                        console.log("User not found, inserting...");
+                        await userCollection.insertOne({ name, email, image });
+                        return user;
+                    } else {
+                        console.log("User exists, signing in...");
+                        return user;
+                    }
+                } catch (error) {
+                    console.error("Error during Google sign-in:", error);
+                    return null;
+                }
+            } else {
+                return user;
             }
-        
-            return token;
-        },
-        
-        async session({ session, token }) {
-            if (token) {
-                session.user = {
-                    id: token.id,
-                    email: token.email,
-                };
-            }
-            return session;
-        },
+        }
     },
     pages: {
         signIn: "/login",

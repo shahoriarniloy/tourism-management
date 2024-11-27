@@ -23,6 +23,7 @@ const DestinationBanner = () => {
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center'
+                    
 
                 }}>
                 <div className="hero-overlay bg-opacity-60"></div>
