@@ -106,7 +106,15 @@ const Navbar = () => {
               pathName === "/addDestinations" ? "font-bold" : ""
             }`}
           >
-            addDestinations
+            AddDestinations
+          </Link>
+          <Link
+            href="/my-added-spot"
+            className={`text-lg hover:text-sky-500 transition duration-300 ${
+              pathName === "/my-added-spot" ? "font-bold" : ""
+            }`}
+          >
+            MyAddedSpots
           </Link>
         </div>
 

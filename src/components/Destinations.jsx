@@ -53,7 +53,7 @@ const destinations =await getDestinations() || [];
                 {destination.description}
               </p>
               <p className="text-sm lg:text-xl font-bold text-[#73D0EA]">
-               Price : {destination.price}$
+               Price : {destination.average}$
               </p>
               <a
                 href="#"
