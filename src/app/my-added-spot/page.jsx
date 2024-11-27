@@ -22,7 +22,7 @@ const Page = () => {
 
   const handleDeleteItem = async (id) => {
     const deleted = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/delete-spot/${id}`, {
+      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`, {
         method: "DELETE",
 
       }
