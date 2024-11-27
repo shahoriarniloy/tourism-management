@@ -20,14 +20,18 @@ const geistMono = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme='light'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
         <Navbar/>
 
+<div 
+className="min-h-[calc(100vh-273px)]"
+>
 {children}
+</div>
 <Footer/>
         </AuthProvider>
       

@@ -13,6 +13,8 @@ const Navbar = () => {
   const session = useSession();
   console.log(session.data);
 
+
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -97,6 +99,22 @@ const Navbar = () => {
             }`}
           >
             About
+          </Link>
+          <Link
+            href="/addDestinations"
+            className={`text-lg hover:text-sky-500 transition duration-300 ${
+              pathName === "/addDestinations" ? "font-bold" : ""
+            }`}
+          >
+            AddDestinations
+          </Link>
+          <Link
+            href="/my-added-spot"
+            className={`text-lg hover:text-sky-500 transition duration-300 ${
+              pathName === "/my-added-spot" ? "font-bold" : ""
+            }`}
+          >
+            MyAddedSpots
           </Link>
         </div>
 

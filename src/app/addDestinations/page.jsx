@@ -1,10 +1,12 @@
-import Destinations from '@/components/Destinations';
+"use client"
+import AddDestinations from '@/components/addDestinations';
 import React from 'react';
 
 const page = () => {
+
     return (
         <div>
-            <Destinations />
+           <AddDestinations />
         </div>
     );
 };
