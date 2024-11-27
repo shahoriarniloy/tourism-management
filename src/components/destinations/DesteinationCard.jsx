@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const DesteinationCard = () => {
@@ -10,8 +11,8 @@ const DesteinationCard = () => {
                         alt="Shoes" />
                 </figure>
                 <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
-                    <h2 className="card-title text-3xl text-white" data-aos="fade-up">Peris</h2>
-                    <p className='text-xl text-white'>3 place</p>
+                    <h2 className="card-title text-3xl text-white" data-aos="fade-up">Paris</h2>
+                    <p className='text-xl text-white'>3 places</p>
                 </div>
             </div>
         </div>
