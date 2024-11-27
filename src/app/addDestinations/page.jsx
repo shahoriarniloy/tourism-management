@@ -1,5 +1,5 @@
 "use client"
-import AddDestinations from '@/components/addDestinations';
+import AddDestinations from '@/components/AddDestinations';
 import React from 'react';
 
 const page = () => {
