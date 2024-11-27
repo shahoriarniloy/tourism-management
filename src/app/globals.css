@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 
 @layer utilities {
   .animated-text {
@@ -30,6 +32,7 @@
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
 }
+
 
 @keyframes shimmer {
   0% {
