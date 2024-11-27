@@ -2,6 +2,7 @@ import { ChevronsRight } from 'lucide-react';
 import Image from 'next/image';
 import image from 'next/image';
 import React from 'react';
+import TitleSection from './TitleSection';
 
 const Room = () => {
     const resorts = [
@@ -55,12 +56,9 @@ const Room = () => {
         }
     ];
     return (
-        <section className="pt-16">
+        <section className="pt-8">
             <div className="text-center mb-8 px-4">
-                <h2 className="text-3xl font-extrabold text-gray-800 inline-block relative after:absolute after:w-4/6 after:h-1 after:left-0 after:right-0 after:-bottom-4 after:mx-auto after:bg-blue-700 after:rounded-lg-full">Hotel Resort</h2>
-                <p className="mt-4 text-lg text-black font-thin">
-                    Our Exquisite Resorts & Suites Collection
-                </p>
+                <TitleSection mainHeader={"RESORT"} subHeader={"Our Exquisite Resorts & Suites Collection"} />
             </div>
 
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 lg:px-16 md:px-8 px-4">
