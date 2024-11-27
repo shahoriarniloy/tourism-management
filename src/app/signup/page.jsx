@@ -1,26 +1,41 @@
 "use client"
 import SocialSignIn from "@/components/SocialSignIn";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Register = () => {
-    const handleSignUp = async(event)=>{
-        event.preventDefault();
-        const newUser={
-        name:event.target.name.value,
-    email:event.target.email.value,
-password:event.target.password.value,
-};
-const resp = await fetch("/signup/api",{
-    method:"POST",
-    body: JSON.stringify(newUser),
-    headers:{
-        "content-type":"application/json"
+  const router = useRouter();
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    const newUser = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+    };
+
+    const resp = await fetch("/signup/api", {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+
+    if (resp.status === 200) {
+      const loginResp = await signIn("credentials", {
+        email: newUser.email,
+        password: newUser.password,
+        redirect: false,
+      });
+
+      if (loginResp.status === 200) {
+        router.push("/"); 
+      }
     }
-})
-if(resp.status===200){
-    event.target.reset()
-}
-    }
+  };
+
   return (
     <div
       className="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -79,7 +94,7 @@ if(resp.status===200){
             Register
           </button>
         </form>
-        <SocialSignIn/>
+        <SocialSignIn />
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{" "}
           <a href="/login" className="text-blue-600 hover:underline">
