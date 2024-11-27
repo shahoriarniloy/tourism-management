@@ -6,7 +6,7 @@ function Footer() {
   return (
     <>
       <footer
-        className="footer-bg relative border h-fit mt-12 w-full mx-auto rounded-lg overflow-hidden radial-gradient-bg
+        className="footer-bg bg-sky-500  relative border h-fit pt-12 w-full mx-auto rounded-lg overflow-hidden radial-gradient-bg
                    [--gradient-center:#4A90E2] [--gradient-edge:#1C2D45]
                    dark:[--gradient-center:#02081765] dark:[--gradient-edge:#020817]"
       >

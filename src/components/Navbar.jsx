@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
+import { SliderBtn } from "./progress-slider";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathName = usePathname();
+  const session = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,12 +104,13 @@ const Navbar = () => {
             scrolled ? "text-gray-800" : "text-white"
           }`}
         >
+          {!session.data?
           <Link
-            href="/join"
+            href="/login"
             className="px-6 py-2 rounded-md border-2 transition duration-300 hover:bg-sky-500 hover:text-white hover:scale-105"
           >
             Join Us
-          </Link>
+          </Link>:<button onClick={()=>signOut()} className="btn border-2 px-4 py-2 rounded-md">Logout</button>}
         </div>
 
         <button
