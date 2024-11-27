@@ -31,7 +31,6 @@ const DestinationBanner = () => {
                     <div className="max-w-md mt-20">
                         <h1 className="mb-5 text-5xl font-bold text-center mx-auto text-white">Destination</h1>
                         <h2 className='flex items-center justify-center gap-1 text-xl font-semibold'><span>Home</span><MdDoubleArrow />{pathDirection}</h2>
-                        <button className="btn btn-primary">Get Started</button>
                     </div>
                 </div>
             </div>

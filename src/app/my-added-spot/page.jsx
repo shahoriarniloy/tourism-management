@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";  
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { GrUpdate } from "react-icons/gr";
 import Link from "next/link";
@@ -11,43 +11,44 @@ const Page = () => {
   const session = useSession();
   const [spots, setSpots] = useState([]);
 
-  const loadData = async () => {
-    const resp = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/${session?.data?.user?.email}`
-    );
-    const data = await resp.json();
-
-    setSpots(data?.myAddedSpots);
-  };
+  const loadData = useCallback(async () => {
+    if (session?.data?.user?.email) {
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/${session?.data?.user?.email}`
+      );
+      const data = await resp.json();
+      setSpots(data?.myAddedSpots);
+    }
+  }, [session?.data?.user?.email]);  
 
   const handleDeleteItem = async (id) => {
     const deleted = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`, {
+      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`,
+      {
         method: "DELETE",
-
       }
-
     );
 
-const resp = await deleted.json();
+    const resp = await deleted.json();
 
-    if(resp?.response?.deletedCount > 0) {
-        loadData()
+    if (resp?.response?.deletedCount > 0) {
+      loadData();  
     }
+
     Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "successfully deleted",
-        showConfirmButton: false,
-        timer: 1500
-      });
-
-
+      position: "top",
+      icon: "success",
+      title: "Successfully deleted",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   useEffect(() => {
-    loadData();
-  }, [session]);
+    if (session?.data?.user?.email) {
+      loadData();
+    }
+  }, [session?.data?.user?.email, loadData]);  // Explicitly include session's email and loadData as dependencies
 
   console.log(spots);
 

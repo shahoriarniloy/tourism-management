@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Swal from "sweetalert2";
 
 const Page = ({ params }) => {
@@ -10,12 +10,12 @@ const Page = ({ params }) => {
   const [spot, setSpot] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const resolvedParams = React.use(params);
+  const { id } = params;
 
-  const loadSpot = async () => {
+  const loadSpot = useCallback(async () => {
     try {
       const spotDetail = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${resolvedParams?.id}`
+        `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`
       );
       const data = await spotDetail.json();
       console.log(data);
@@ -25,52 +25,49 @@ const Page = ({ params }) => {
       console.error("Failed to load spot:", error);
       setLoading(false);
     }
-  };
+  }, [id]);
 
+  const handleUpdateSpot = async (event) => {
+    event.preventDefault();
 
-const handleUpdateSpot = async (event) => {
-event.preventDefault();
+    const updateSpot = {
+      name: event.target.name.value,
+      country: event.target.country.value,
+      location: event.target.location.value,
+      travel: event.target.travel.value,
+      photoURL1: event.target.photo1.value,
+      photoURL2: event.target.photo2.value,
+      average: event.target.average.value,
+      seasonality: event.target.seasonality.value,
+      total: event.target.total.value,
+      description: event.target.description.value,
+    };
 
-const updateSpot = {
-  name: event.target.name.value,
-  country: event.target.country.value,
-  location: event.target.location.value,
-  travel: event.target.travel.value,
-  photoURL1: event.target.photo1.value,
-  photoURL2: event.target.photo2.value,
-  average: event.target.average.value,
-  seasonality: event.target.seasonality.value,
-  total: event.target.total.value,
-  description: event.target.description.value,
-}
-
-  const resp = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${resolvedParams?.id}`, {
-      method: "PATCH",
-      body: JSON.stringify(updateSpot),
-      headers: {
-        "Content-Type": "application/json",
+    const resp = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updateSpot),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
+    );
+
+    if (resp.status === 200) {
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Successfully Updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
-  );
-
-  if(resp.status === 200){
-    Swal.fire({
-      position: "top",
-      icon: "success",
-      title: "successfully Updated",
-      showConfirmButton: false,
-      timer: 1500
-    });
-  }
-
-}
-
-
+  };
 
   useEffect(() => {
     loadSpot();
-  }, [resolvedParams]);
+  }, [id, loadSpot]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -89,7 +86,10 @@ const updateSpot = {
             adventures. Join us on an exploration filled with wonder and
             excitement.
           </p>
-          <form onSubmit={handleUpdateSpot} className="grid grid-cols-1 md:grid-cols-2 gap-6  mx-auto">
+          <form
+            onSubmit={handleUpdateSpot}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6  mx-auto"
+          >
             <div>
               <div className="form-control">
                 <label className="label">

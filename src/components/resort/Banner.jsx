@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import { usePathname } from 'next/navigation';
+import { MdDoubleArrow } from 'react-icons/md';
 
 const Banner = () => {
   const pathName = usePathname();
@@ -13,7 +14,6 @@ const Banner = () => {
       }
       return part;
     })
-    .join(' / ');
 
   return (
     <div className="">
@@ -29,8 +29,8 @@ const Banner = () => {
         }}
       >
         <h2 className="text-4xl font-bold">Resort</h2>
-        <h6 className="text-lg font-bold pt-1">
-          Home 
+        <h6 className="text-lg font-bold pt-1 flex justify-center items-center">
+          Home <MdDoubleArrow />
           <span className="text-sky-500">{formattedPathName}</span>
         </h6>
       </div>

@@ -45,3 +45,9 @@
       border-image: linear-gradient(90deg, #0ea5e9, #ffffff, #0ea5e9) 1;
   }
 }
+
+
+.custom-suggestions-container {
+  max-height: 100px;  
+  overflow-y: auto;   
+}
