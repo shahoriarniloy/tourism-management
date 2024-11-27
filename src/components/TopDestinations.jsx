@@ -1,26 +1,29 @@
-import React from 'react';
-import Image from 'next/image';
-import { ChevronsRight } from 'lucide-react';
+import React from "react";
+import Image from "next/image";
+import { ChevronsRight } from "lucide-react";
+import Link from "next/link";
 
 function TopDestinations() {
   const destinations = [
     {
-      image: 'https://i.ibb.co/fQvj78y/braden-jarvis-pr-Sog-Oo-Fmkw-unsplash.jpg',
-      title: 'Hawaii',
+      image:
+        "https://i.ibb.co/fQvj78y/braden-jarvis-pr-Sog-Oo-Fmkw-unsplash.jpg",
+      title: "Hawaii",
       description:
-        'Visiting Hawaii offers a unique blend of stunning beaches, lush landscapes, and rich cultural experiences.',
+        "Visiting Hawaii offers a unique blend of stunning beaches, lush landscapes, and rich cultural experiences.",
     },
     {
-      image: 'https://i.ibb.co/LYkf0pr/gondola-ride-in-autumn-in-kashmir-2023-10-18t174214-790-min.png',
-      title: 'Maldives',
+      image:
+        "https://i.ibb.co/LYkf0pr/gondola-ride-in-autumn-in-kashmir-2023-10-18t174214-790-min.png",
+      title: "Maldives",
       description:
-        'The Maldives is a tropical paradise known for crystal-clear waters, overwater bungalows, and serene beauty.',
+        "The Maldives is a tropical paradise known for crystal-clear waters, overwater bungalows, and serene beauty.",
     },
     {
-      image: 'https://i.ibb.co/j85Gjdm/Paris1.jpg',
-      title: 'Paris',
+      image: "https://i.ibb.co/j85Gjdm/Paris1.jpg",
+      title: "Paris",
       description:
-        'Paris enchants visitors with its iconic landmarks, rich history, art, and exquisite cuisine.',
+        "Paris enchants visitors with its iconic landmarks, rich history, art, and exquisite cuisine.",
     },
   ];
 
@@ -31,7 +34,8 @@ function TopDestinations() {
           Top Destinations
         </h1>
         <p className="mt-4 text-lg text-black font-thin">
-          Discover breathtaking locations, experience unique cultures, and immerse yourself in unforgettable adventures.
+          Discover breathtaking locations, experience unique cultures, and
+          immerse yourself in unforgettable adventures.
         </p>
       </div>
 
@@ -74,11 +78,14 @@ function TopDestinations() {
 
       <div className="flex flex-col items-center mt-6">
         <p className="text-sm mb-2 text-black font-thin">
-          Ready to start your next adventure? See more of the world’s hidden gems and iconic landmarks.
+          Ready to start your next adventure? See more of the world’s hidden
+          gems and iconic landmarks.
         </p>
-        <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 border-2 border-sky-500 px-12 font-medium text-white shadow-md hover:shadow-lg transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]">
+     <Link href={`/destinations`}>
+     <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 border-2 border-sky-500 px-12 font-medium text-white shadow-md hover:shadow-lg transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]">
           See More
         </button>
+     </Link>
       </div>
     </section>
   );

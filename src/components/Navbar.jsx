@@ -11,6 +11,9 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathName = usePathname();
   const session = useSession();
+  console.log(session.data);
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,6 +100,22 @@ const Navbar = () => {
           >
             About
           </Link>
+          <Link
+            href="/addDestinations"
+            className={`text-lg hover:text-sky-500 transition duration-300 ${
+              pathName === "/addDestinations" ? "font-bold" : ""
+            }`}
+          >
+            AddDestinations
+          </Link>
+          <Link
+            href="/my-added-spot"
+            className={`text-lg hover:text-sky-500 transition duration-300 ${
+              pathName === "/my-added-spot" ? "font-bold" : ""
+            }`}
+          >
+            MyAddedSpots
+          </Link>
         </div>
 
         <div
@@ -109,7 +128,7 @@ const Navbar = () => {
             href="/login"
             className="px-6 py-2 rounded-md border-2 transition duration-300 hover:bg-sky-500 hover:text-white hover:scale-105"
           >
-            Join Us
+            Join Us 
           </Link>:<button onClick={()=>signOut()} className="btn border-2 px-4 py-2 rounded-md">Logout</button>}
         </div>
 

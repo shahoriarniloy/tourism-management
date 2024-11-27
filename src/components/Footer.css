@@ -1,9 +1,8 @@
 .footer {
-    background-color: #eaf9fc; /* Replace with your color */
-    background-image: url('/images/about/Asset-2.png'); /* Update with your image path */
+    background-color: #eaf9fc; 
+    background-image: url('/images/about/Asset-2.png'); 
     background-size: cover;
     background-repeat: no-repeat;
-    /* color: white; */
     padding: 40px 20px;
   }
   

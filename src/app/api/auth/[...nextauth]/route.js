@@ -2,8 +2,11 @@ import { connectDB } from "@/lib/connectDB";
 import NextAuth from "next-auth";
 import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+// import FacebookProvider from "next-auth/providers/facebook";
 
 const handler = NextAuth({
+    secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60,
@@ -36,24 +39,42 @@ const handler = NextAuth({
                 }
             },
         }),
+        GoogleProvider({
+            clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
+          }),
+        //   FacebookProvider({
+        //     clientId: process.env.FACEBOOK_CLIENT_ID,
+        //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+        //   })
     ],
     callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.id = user.id;
-                token.email = user.email;
+        async signIn({ user, account }) {
+            if(account.provider === 'google') {
+                console.log("Google user info:", user);
+                const { email, name, image } = user;
+    
+                try {
+                    const db = await connectDB(); // Ensure awaiting the connection
+                    const userCollection = db.collection('users');
+                    const userExist = await userCollection.findOne({ email });
+    
+                    if (!userExist) {
+                        console.log("User not found, inserting...");
+                        await userCollection.insertOne({ name, email, image });
+                        return user;
+                    } else {
+                        console.log("User exists, signing in...");
+                        return user;
+                    }
+                } catch (error) {
+                    console.error("Error during Google sign-in:", error);
+                    return null;
+                }
+            } else {
+                return user;
             }
-            return token;
-        },
-        async session({ session, token }) {
-            if (token) {
-                session.user = {
-                    id: token.id,
-                    email: token.email,
-                };
-            }
-            return session;
-        },
+        }
     },
     pages: {
         signIn: "/login",
