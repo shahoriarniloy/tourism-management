@@ -1,10 +1,11 @@
 import Destinations from '@/components/Destinations';
+import DestinationHome from '@/components/destinations/DestinationHome';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            <Destinations />
+            <DestinationHome/>
         </div>
     );
 };
