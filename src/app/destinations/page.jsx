@@ -1,11 +1,14 @@
+
+import DestinationHome from '@/components/destinations/DestinationHome';
 import React from 'react';
 
-const page = () => {
+const Destinationpage = () => {
     return (
         <div>
-            
-        </div>
+            <DestinationHome></DestinationHome>
+       </div>
     );
 };
 
-export default page;
+export default Destinationpage;
+
