@@ -86,7 +86,7 @@ const resp = await deleted.json();
                 <td>{spot?.average}$</td>
 
                 <td>
-                  <Link href={`/dashboard/update/${spot?._id}`} className="">
+                  <Link href={`/my-added-spot/update/${spot?._id}`} className="">
                     <button className="btn">
                       <GrUpdate className="text-green-500 text-xl font-bold" />
                     </button>
