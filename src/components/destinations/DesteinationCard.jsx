@@ -3,19 +3,15 @@ import React from 'react';
 const DesteinationCard = () => {
     return (
         <div>
-            It is a destination card
-            <div className="card bg-base-100 image-full w-96 shadow-xl relative">
+            <div className="relative card  bg-base-100 shadow-xl overflow-hidden w-full" data-aos="zoom-in">
                 <figure>
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    <img className='w-96'
+                        src="/images/destinations/tourism.jpg"
                         alt="Shoes" />
                 </figure>
-                <div className="card-body opacity-0 absolute top-1/2 hover:opacity-100">
-                    <h2 className="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
+                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                    <h2 className="card-title text-3xl text-white" data-aos="fade-up">Peris</h2>
+                    <p className='text-xl text-white'>3 place</p>
                 </div>
             </div>
         </div>
