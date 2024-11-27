@@ -9,13 +9,12 @@ const LandingPage = () => {
         <div>
             <Hero />
             <div className="lg:px-16">
-      <TopDestinations/> 
-      <TopResorts/>
-    
-            <TourismSupport />
+                <TopDestinations />
+                <TopResorts />
+                <TourismSupport />
 
 
-      </div>
+            </div>
         </div>
     );
 };
