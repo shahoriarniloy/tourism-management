@@ -11,6 +11,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathName = usePathname();
   const session = useSession();
+  console.log(session.data);
 
 
 
@@ -119,7 +120,7 @@ const Navbar = () => {
             href="/login"
             className="px-6 py-2 rounded-md border-2 transition duration-300 hover:bg-sky-500 hover:text-white hover:scale-105"
           >
-            Join Us
+            Join Us 
           </Link>:<button onClick={()=>signOut()} className="btn border-2 px-4 py-2 rounded-md">Logout</button>}
         </div>
 

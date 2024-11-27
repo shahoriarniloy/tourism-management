@@ -1,4 +1,5 @@
 "use client"
+import SocialSignIn from "@/components/SocialSignIn";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -72,24 +73,7 @@ const LoginForm = () => {
           </button>
         </form>
 
-        <div className="mt-4">
-          <p className="text-center text-sm text-gray-600">Or sign in with</p>
-          <div className="flex justify-center space-x-4 mt-3">
-            <button
-              className="flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-            >
-              <i className="fab fa-google"></i> 
-              <span>Google</span>
-            </button>
-
-            <button
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
-            >
-              <i className="fab fa-facebook-f"></i>
-              <span>Facebook</span>
-            </button>
-          </div>
-        </div>
+        <SocialSignIn/>
 
         <p className="mt-4 text-center text-sm text-gray-600">
           Don’t have an account?{" "}
