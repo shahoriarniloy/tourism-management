@@ -5,16 +5,18 @@ import Facilities from './Facilities';
 import PhotoGallery from './PhotoGallery';
 import Testimonial from './Testimonial';
 import Service from './Service';
+import SearchResort from './SearchResort';
 
 const ResortHome = () => {
     return (
         <div>
             <Banner/>
+            <SearchResort/>
             <Room />
-            <Facilities/>
-            <Service/>
+            {/* <Facilities/>
+            <Service/> */}
             <PhotoGallery/>
-            <Testimonial/>
+            {/* <Testimonial/> */}
         </div>
     );
 };
