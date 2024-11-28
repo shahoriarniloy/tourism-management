@@ -4,7 +4,6 @@ import Image from 'next/image';
 import TitleSection from './TitleSection';
 
 const Testimonial = () => {
-    // Testimonial data
     const testimonials = [
         {
             name: "John Doe",
@@ -29,24 +28,20 @@ const Testimonial = () => {
         }
     ];
 
-    // State to track the current testimonial index
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-    // Function to go to the next testimonial
     const nextTestimonial = () => {
         setCurrentTestimonial((prevIndex) => (prevIndex + 1) % testimonials.length);
     };
 
-    // Function to go to the previous testimonial
     const prevTestimonial = () => {
         setCurrentTestimonial((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
     };
 
     return (
         <section>
-            <div className="mt-6 font-[sans-serif]">
+            <div className="mt-12 font-[sans-serif] mb-12">
                 <div className="max-w-4xl mx-auto relative">
-                    {/* Title Section */}
                     <div className="text-center mb-8 px-4">
                         <TitleSection
                             mainHeader={"What our happy clients say"}
@@ -54,7 +49,6 @@ const Testimonial = () => {
                         />
                     </div>
 
-                    {/* Testimonial Section */}
                     <div className="max-w-xl mt-16 mx-auto">
                         <div className="flex flex-col items-center text-center">
                             <Image
@@ -66,16 +60,14 @@ const Testimonial = () => {
                             />
                             <div className="mt-4">
                                 <h4 className="text-gray-800 text-base font-extrabold">{testimonials[currentTestimonial].name}</h4>
-                                <p className="text-xs text-gray-500 mt-1">{testimonials[currentTestimonial].designation}</p>
+                                {/* <p className="text-xs text-gray-500 mt-1">{testimonials[currentTestimonial].designation}</p> */}
                             </div>
                         </div>
 
-                        {/* Review */}
                         <div className="mt-6 text-center">
                             <p className="text-sm leading-relaxed">{testimonials[currentTestimonial].review}</p>
                         </div>
 
-                        {/* Rating */}
                         <div className="flex justify-center space-x-1.5 mt-4">
                             {[...Array(5)].map((_, index) => (
                                 <svg
@@ -92,9 +84,8 @@ const Testimonial = () => {
                         </div>
                     </div>
 
-                    {/* Arrow Buttons */}
                     <div className="bg-gray-300 w-10 h-10 grid items-center justify-center rounded-full rotate-90 shrink-0 cursor-pointer absolute left-0 top-0 bottom-0 my-auto" onClick={prevTestimonial}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-3 fill-gray-800 inline" viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-3 fill-[#fff] inline" viewBox="0 0 24 24">
                             <path
                                 d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
                                 clipRule="evenodd"
@@ -102,7 +93,7 @@ const Testimonial = () => {
                             ></path>
                         </svg>
                     </div>
-                    <div className="bg-gray-800 w-10 h-10 grid items-center justify-center rounded-full -rotate-90 shrink-0 cursor-pointer absolute right-0 top-0 bottom-0 my-auto" onClick={nextTestimonial}>
+                    <div className="bg-gray-300 w-10 h-10 grid items-center justify-center rounded-full -rotate-90 shrink-0 cursor-pointer absolute right-0 top-0 bottom-0 my-auto" onClick={nextTestimonial}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-3 fill-[#fff] inline" viewBox="0 0 24 24">
                             <path
                                 fillRule="evenodd"

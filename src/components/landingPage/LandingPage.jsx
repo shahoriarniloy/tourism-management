@@ -3,6 +3,7 @@ import TourismSupport from '../Faq';
 import Hero from '../Hero';
 import TopDestinations from '../TopDestinations';
 import TopResorts from '../TopResorts';
+import Testimonial from '../resort/Testimonial';
 
 const LandingPage = () => {
     return (
@@ -11,6 +12,7 @@ const LandingPage = () => {
             <div className="lg:px-16">
                 <TopDestinations />
                 <TopResorts />
+                <Testimonial/>
                 <TourismSupport />
 
 
