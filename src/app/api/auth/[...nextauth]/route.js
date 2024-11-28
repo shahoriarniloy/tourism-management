@@ -55,13 +55,14 @@ const handler = NextAuth({
                 const { email, name, image } = user;
     
                 try {
-                    const db = await connectDB(); // Ensure awaiting the connection
+                    const db = await connectDB(); 
                     const userCollection = db.collection('users');
                     const userExist = await userCollection.findOne({ email });
     
                     if (!userExist) {
                         console.log("User not found, inserting...");
                         await userCollection.insertOne({ name, email, image });
+                        
                         return user;
                     } else {
                         console.log("User exists, signing in...");

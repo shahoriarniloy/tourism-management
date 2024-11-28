@@ -4,21 +4,19 @@ import React, {
   useState,
   useEffect,
   useRef,
-  useCallback,
 } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from './utils';
-
 const ProgressSliderContext = createContext(undefined);
-
 export const useProgressSliderContext = () => {
   const context = useContext(ProgressSliderContext);
   if (!context) {
-    throw new Error('useProgressSliderContext must be used within a ProgressSlider');
+    throw new Error(
+      'useProgressSliderContext must be used within a ProgressSlider'
+    );
   }
   return context;
 };
-
 export const ProgressSlider = ({
   children,
   duration = 5000,
@@ -34,7 +32,6 @@ export const ProgressSlider = ({
   const firstFrameTime = useRef(performance.now());
   const targetValue = useRef(null);
   const [sliderValues, setSliderValues] = useState([]);
-
   useEffect(() => {
     const getChildren = React.Children.toArray(children).find(
       (child) => child.type === SliderContent
@@ -46,8 +43,16 @@ export const ProgressSlider = ({
       setSliderValues(values);
     }
   }, [children]);
-
-  const animate = useCallback((now) => {
+  useEffect(() => {
+    if (sliderValues.length > 0) {
+      firstFrameTime.current = performance.now();
+      frame.current = requestAnimationFrame(animate);
+    }
+    return () => {
+      cancelAnimationFrame(frame.current);
+    };
+  }, [sliderValues, active, isFastForward]);
+  const animate = (now) => {
     const currentDuration = isFastForward ? fastDuration : duration;
     const elapsedTime = now - firstFrameTime.current;
     const timeFraction = elapsedTime / currentDuration;
@@ -73,18 +78,7 @@ export const ProgressSlider = ({
       setProgress(0);
       firstFrameTime.current = performance.now();
     }
-  }, [isFastForward, duration, fastDuration, progress, sliderValues, active]);
-
-  useEffect(() => {
-    if (sliderValues.length > 0) {
-      firstFrameTime.current = performance.now();
-      frame.current = requestAnimationFrame(animate);
-    }
-    return () => {
-      cancelAnimationFrame(frame.current);
-    };
-  }, [sliderValues, active, isFastForward, animate]);
-
+  };
   const handleButtonClick = (value) => {
     if (value !== active) {
       const elapsedTime = performance.now() - firstFrameTime.current;
@@ -95,18 +89,17 @@ export const ProgressSlider = ({
       firstFrameTime.current = performance.now();
     }
   };
-
   return (
-    <ProgressSliderContext.Provider value={{ active, progress, handleButtonClick, vertical }}>
+    <ProgressSliderContext.Provider
+      value={{ active, progress, handleButtonClick, vertical }}
+    >
       <div className={cn('relative', className)}>{children}</div>
     </ProgressSliderContext.Provider>
   );
 };
-
 export const SliderContent = ({ children, className }) => {
   return <div className={cn('', className)}>{children}</div>;
 };
-
 export const SliderWrapper = ({ children, value, className }) => {
   const { active } = useProgressSliderContext();
   return (
@@ -125,16 +118,18 @@ export const SliderWrapper = ({ children, value, className }) => {
     </AnimatePresence>
   );
 };
-
 export const SliderBtnGroup = ({ children, className }) => {
   return <div className={cn('', className)}>{children}</div>;
 };
-
 export const SliderBtn = ({ children, value, className, progressBarClass }) => {
-  const { active, progress, handleButtonClick, vertical } = useProgressSliderContext();
+  const { active, progress, handleButtonClick, vertical } =
+    useProgressSliderContext();
   return (
     <button
-      className={cn(`relative ${active === value ? 'opacity-100' : 'opacity-50'}`, className)}
+      className={cn(
+        `relative ${active === value ? 'opacity-100' : 'opacity-50'}`,
+        className
+      )}
       onClick={() => handleButtonClick(value)}
     >
       {children}
@@ -146,7 +141,8 @@ export const SliderBtn = ({ children, value, className, progressBarClass }) => {
         <span
           className={cn('absolute left-0 ', progressBarClass)}
           style={{
-            [vertical ? 'height' : 'width']: active === value ? `${progress}%` : '0%',
+            [vertical ? 'height' : 'width']:
+              active === value ? `${progress}%` : '0%',
           }}
         />
       </div>
