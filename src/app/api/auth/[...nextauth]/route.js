@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 // import FacebookProvider from "next-auth/providers/facebook";
 
 const handler = NextAuth({
-    secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60,
