@@ -11,7 +11,7 @@ const ResortHome = () => {
     return (
         <div>
             <Banner/>
-            <SearchResort/>
+            {/* <SearchResort/> */}
             <Room />
             {/* <Facilities/>
             <Service/> */}
