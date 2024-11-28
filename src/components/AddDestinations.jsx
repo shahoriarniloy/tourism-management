@@ -32,7 +32,7 @@ const {data:session} = useSession()
         }
        
         
-        fetch( `${process.env.NEXT_PUBLIC_API_URL}/addDestinations/api`, {
+        fetch( `${process.env.NEXT_PUBLIC_API_URL}/dashboard/addDestinations/api`, {
         method: 'POST',
         headers: {
         'content-type': 'application/json'

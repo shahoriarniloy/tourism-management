@@ -14,7 +14,7 @@ const Page = () => {
   const loadData = useCallback(async () => {
     if (session?.data?.user?.email) {
       const resp = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/${session?.data?.user?.email}`
+        `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/${session?.data?.user?.email}`
       );
       const data = await resp.json();
       setSpots(data?.myAddedSpots);
@@ -23,7 +23,7 @@ const Page = () => {
 
   const handleDeleteItem = async (id) => {
     const deleted = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/spot/${id}`,
       {
         method: "DELETE",
       }
@@ -86,7 +86,7 @@ const Page = () => {
                 <td className="border px-4 py-2 text-center">{spot?.name}</td>
                 <td className="border px-4 py-2 text-center">{spot?.average}$</td>
                 <td className="border px-4 py-2 text-center">
-                  <Link href={`/my-added-spot/update/${spot?._id}`} className="">
+                  <Link href={`/dashboard/my-added-spot/update/${spot?._id}`} className="">
                     <button className="btn bg-sky-500 hover:bg-sky-400 text-white px-4 py-2 rounded-lg shadow-md">
                       <GrUpdate className="text-white text-xl font-bold" />
                     </button>
