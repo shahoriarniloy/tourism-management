@@ -14,7 +14,7 @@ export const POST = async (req) => {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error adding spot:", error);
-    return NextResponse.json({ error: "Failed to add the spot." }, { status: 500 });
+    console.error("Error adding Package:", error);
+    return NextResponse.json({ error: "Failed to add the Package." }, { status: 500 });
   }
 };
