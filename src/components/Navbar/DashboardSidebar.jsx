@@ -86,7 +86,7 @@ const DashboardSidebar = () => {
               <FaList className="mr-2 text-xl" /> Packages List
             </span>
           </Link>
-          <Link href="/dashboard/settings">
+          <Link href="/dashboard/myResort">
             <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
               <FaCog className="mr-2 text-xl" /> Settings
             </span>
