@@ -12,7 +12,7 @@ const LandingPage = () => {
             <div className="lg:px-16">
                 <TopDestinations />
                 <TopResorts />
-                <Testimonial/>
+                {/* <Testimonial/> */}
                 <TourismSupport />
 
 

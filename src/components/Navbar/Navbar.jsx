@@ -107,7 +107,7 @@ const Navbar = () => {
   className="flex items-center space-x-2"
 >
   <Image
-    src={session.data.user.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
+    src={session?.data?.user?.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
     alt="Profile"
     width={32} 
     height={32} 
@@ -175,11 +175,25 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            href="/join"
-            className="block mt-4 px-6 py-2 bg-sky-500 text-white text-center rounded-md"
-          >
-            Join Us
-          </Link>
+                    href="/dashboard/addDestinations"
+                    className={`block py-2 text-gray-800 hover:text-sky-500 ${pathName === "/about" ? "font-bold" : ""}`}
+                    >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => signOut()}
+                    className={`btn bg-sky-100 border-2 border-sky-300 flex items-center gap-2 py-2 text-gray-800 hover:text-sky-500 ${pathName === "/about" ? "font-bold" : ""}`}
+                    >
+                      <Image
+    src={session?.data?.user?.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
+    alt="Profile"
+    width={32} 
+    height={32} 
+    className="rounded-full"
+  />
+                    Logout
+                  </button>
+          
         </div>
       </div>
     </nav>
