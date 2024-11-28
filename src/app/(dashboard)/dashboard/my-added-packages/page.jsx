@@ -9,21 +9,21 @@ import Swal from "sweetalert2";
 
 const Page = () => {
   const session = useSession();
-  const [spots, setSpots] = useState([]);
+  const [packages, setPackages] = useState([]);
 
   const loadData = useCallback(async () => {
     if (session?.data?.user?.email) {
       const resp = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/${session?.data?.user?.email}`
+        `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-packages/api/${session?.data?.user?.email}`
       );
       const data = await resp.json();
-      setSpots(data?.myAddedSpots);
+      setPackages(data?.myAddedPackages);
     }
   }, [session?.data?.user?.email]);
 
   const handleDeleteItem = async (id) => {
     const deleted = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/spot/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-packages/api/packages/${id}`,
       {
         method: "DELETE",
       }
@@ -50,7 +50,7 @@ const Page = () => {
     }
   }, [session?.data?.user?.email, loadData]);
 
-  console.log(spots);
+
 
   return (
     <div className="container mx-auto p-4">
@@ -64,29 +64,29 @@ const Page = () => {
             <tr>
               <th className="px-4 py-2">#</th>
               <th className="px-4 py-2">Images</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Price</th>
+              <th className="px-4 py-2">Category</th>
+              <th className="px-4 py-2">Total Price</th>
               <th className="px-4 py-2">Update</th>
               <th className="px-4 py-2">Delete</th>
             </tr>
           </thead>
           <tbody>
-            {spots.map((spot, index) => (
-              <tr key={spot._id} className="hover:bg-gray-100">
+            {packages.map((p, index) => (
+              <tr key={p._id} className="hover:bg-gray-100">
                 <td className="border px-4 py-2 text-center">{index + 1}</td>
                 <td className="border px-4 py-2 text-center">
                   <Image
                     alt={`image`}
-                    src={spot?.photoURL1}
+                    src={p?.photoURL1}
                     height={100}
                     width={100}
                     className="rounded-lg"
                   />
                 </td>
-                <td className="border px-4 py-2 text-center">{spot?.name}</td>
-                <td className="border px-4 py-2 text-center">{spot?.average}$</td>
+                <td className="border px-4 py-2 text-center">{p?.category}</td>
+                <td className="border px-4 py-2 text-center">{p?.totalPrice}$</td>
                 <td className="border px-4 py-2 text-center">
-                  <Link href={`/dashboard/my-added-spot/update/${spot?._id}`} className="">
+                  <Link href={`/dashboard/my-added-packages/update/${p?._id}`} className="">
                     <button className="btn bg-sky-500 hover:bg-sky-400 text-white px-4 py-2 rounded-lg shadow-md">
                       <GrUpdate className="text-white text-xl font-bold" />
                     </button>
@@ -94,7 +94,7 @@ const Page = () => {
                 </td>
                 <td className="border px-4 py-2 text-center">
                   <button
-                    onClick={() => handleDeleteItem(spot?._id)}
+                    onClick={() => handleDeleteItem(p?._id)}
                     className="btn bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-lg shadow-md"
                   >
                     <RiDeleteBin6Fill className="text-white text-xl font-bold" />

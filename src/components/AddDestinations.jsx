@@ -48,7 +48,7 @@ const {data:session} = useSession()
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Your work has been saved",
+                    title: "Destination added successfully",
                     showConfirmButton: false,
                     timer: 1500
                 });
