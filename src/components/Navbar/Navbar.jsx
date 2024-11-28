@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
-import { SliderBtn } from "./progress-slider";
+import { SliderBtn } from "../progress-slider";
 import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
@@ -34,8 +34,12 @@ const Navbar = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  
+  
+  
   return (
+
+    
     <nav
       className={`fixed w-full py-4 transition-all duration-500 ${
         scrolled ? "bg-white shadow-md" : "bg-transparent"
@@ -100,22 +104,7 @@ const Navbar = () => {
           >
             About
           </Link>
-          <Link
-            href="/addDestinations"
-            className={`text-lg hover:text-sky-500 transition duration-300 ${
-              pathName === "/addDestinations" ? "font-bold" : ""
-            }`}
-          >
-            AddDestinations
-          </Link>
-          <Link
-            href="/my-added-spot"
-            className={`text-lg hover:text-sky-500 transition duration-300 ${
-              pathName === "/my-added-spot" ? "font-bold" : ""
-            }`}
-          >
-            MyAddedSpots
-          </Link>
+          
         </div>
 
         <div
