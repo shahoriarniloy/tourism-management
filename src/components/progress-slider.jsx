@@ -4,10 +4,13 @@ import React, {
   useState,
   useEffect,
   useRef,
+  useCallback,
 } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from './utils';
+
 const ProgressSliderContext = createContext(undefined);
+
 export const useProgressSliderContext = () => {
   const context = useContext(ProgressSliderContext);
   if (!context) {
@@ -17,6 +20,7 @@ export const useProgressSliderContext = () => {
   }
   return context;
 };
+
 export const ProgressSlider = ({
   children,
   duration = 5000,
@@ -32,6 +36,7 @@ export const ProgressSlider = ({
   const firstFrameTime = useRef(performance.now());
   const targetValue = useRef(null);
   const [sliderValues, setSliderValues] = useState([]);
+
   useEffect(() => {
     const getChildren = React.Children.toArray(children).find(
       (child) => child.type === SliderContent
@@ -43,6 +48,38 @@ export const ProgressSlider = ({
       setSliderValues(values);
     }
   }, [children]);
+
+  const animate = useCallback(
+    (now) => {
+      const currentDuration = isFastForward ? fastDuration : duration;
+      const elapsedTime = now - firstFrameTime.current;
+      const timeFraction = elapsedTime / currentDuration;
+      if (timeFraction <= 1) {
+        setProgress((prevProgress) =>
+          isFastForward
+            ? prevProgress + (100 - prevProgress) * timeFraction
+            : timeFraction * 100
+        );
+        frame.current = requestAnimationFrame(animate);
+      } else {
+        if (isFastForward) {
+          setIsFastForward(false);
+          if (targetValue.current !== null) {
+            setActive(targetValue.current);
+            targetValue.current = null;
+          }
+        } else {
+          const currentIndex = sliderValues.indexOf(active);
+          const nextIndex = (currentIndex + 1) % sliderValues.length;
+          setActive(sliderValues[nextIndex]);
+        }
+        setProgress(0);
+        firstFrameTime.current = performance.now();
+      }
+    },
+    [isFastForward, fastDuration, duration, sliderValues, active]
+  );
+
   useEffect(() => {
     if (sliderValues.length > 0) {
       firstFrameTime.current = performance.now();
@@ -51,34 +88,8 @@ export const ProgressSlider = ({
     return () => {
       cancelAnimationFrame(frame.current);
     };
-  }, [sliderValues, active, isFastForward]);
-  const animate = (now) => {
-    const currentDuration = isFastForward ? fastDuration : duration;
-    const elapsedTime = now - firstFrameTime.current;
-    const timeFraction = elapsedTime / currentDuration;
-    if (timeFraction <= 1) {
-      setProgress(
-        isFastForward
-          ? progress + (100 - progress) * timeFraction
-          : timeFraction * 100
-      );
-      frame.current = requestAnimationFrame(animate);
-    } else {
-      if (isFastForward) {
-        setIsFastForward(false);
-        if (targetValue.current !== null) {
-          setActive(targetValue.current);
-          targetValue.current = null;
-        }
-      } else {
-        const currentIndex = sliderValues.indexOf(active);
-        const nextIndex = (currentIndex + 1) % sliderValues.length;
-        setActive(sliderValues[nextIndex]);
-      }
-      setProgress(0);
-      firstFrameTime.current = performance.now();
-    }
-  };
+  }, [sliderValues, active, isFastForward, animate]);
+
   const handleButtonClick = (value) => {
     if (value !== active) {
       const elapsedTime = performance.now() - firstFrameTime.current;
@@ -89,6 +100,7 @@ export const ProgressSlider = ({
       firstFrameTime.current = performance.now();
     }
   };
+
   return (
     <ProgressSliderContext.Provider
       value={{ active, progress, handleButtonClick, vertical }}
@@ -97,9 +109,11 @@ export const ProgressSlider = ({
     </ProgressSliderContext.Provider>
   );
 };
+
 export const SliderContent = ({ children, className }) => {
   return <div className={cn('', className)}>{children}</div>;
 };
+
 export const SliderWrapper = ({ children, value, className }) => {
   const { active } = useProgressSliderContext();
   return (
@@ -118,9 +132,11 @@ export const SliderWrapper = ({ children, value, className }) => {
     </AnimatePresence>
   );
 };
+
 export const SliderBtnGroup = ({ children, className }) => {
   return <div className={cn('', className)}>{children}</div>;
 };
+
 export const SliderBtn = ({ children, value, className, progressBarClass }) => {
   const { active, progress, handleButtonClick, vertical } =
     useProgressSliderContext();

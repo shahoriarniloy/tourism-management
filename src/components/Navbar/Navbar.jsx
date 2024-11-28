@@ -107,7 +107,7 @@ const Navbar = () => {
   className="flex items-center space-x-2"
 >
   <Image
-    src={session.data.user.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
+    src={session?.data?.user?.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
     alt="Profile"
     width={32} 
     height={32} 
@@ -185,7 +185,7 @@ const Navbar = () => {
                     className={`btn bg-sky-100 border-2 border-sky-300 flex items-center gap-2 py-2 text-gray-800 hover:text-sky-500 ${pathName === "/about" ? "font-bold" : ""}`}
                     >
                       <Image
-    src={session.data.user.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
+    src={session?.data?.user?.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
     alt="Profile"
     width={32} 
     height={32} 
@@ -193,45 +193,7 @@ const Navbar = () => {
   />
                     Logout
                   </button>
-          {/* {!session.data ? (
-            <Link
-              href="/login"
-              className="px-6 py-2 rounded-md border-2 transition duration-300 hover:bg-sky-500 hover:text-white hover:scale-105"
-            >
-              Join Us
-            </Link>
-          ) : (
-            <div className="relative">
-              <button
-  onClick={toggleProfileMenu}
-  className="flex items-center space-x-2"
->
-  <Image
-    src={session.data.user.image || 'https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg'}
-    alt="Profile"
-    width={32} 
-    height={32} 
-    className="rounded-full"
-  />
-</button>
-              {profileMenuOpen && (
-                <div className="absolute right-0 mt-2 bg-white rounded-md shadow-md w-48 py-2">
-                  <Link
-                    href="/dashboard/addDestinations"
-                    className="block px-4 py-2 text-gray-800 hover:text-sky-500"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={() => signOut()}
-                    className="block w-full text-left px-4 py-2 text-gray-800 hover:text-sky-500"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          )} */}
+          
         </div>
       </div>
     </nav>
