@@ -23,37 +23,56 @@ const Page = ({ params }) => {
   const loadSpot = useCallback(async () => {
     if (!id) return;
     try {
-      const spotDetail = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/spot/${id}`
+      const packageDetail = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-packages/api/packages/${id}`
       );
-      const data = await spotDetail.json();
+      const data = await packageDetail.json();
       console.log(data);
       setSpot(data?.data || {});
       setLoading(false);
     } catch (error) {
-      console.error("Failed to load spot:", error);
+      console.error("Failed to load Package Data:", error);
       setLoading(false);
     }
   }, [id]);
 
-  const handleUpdateSpot = async (event) => {
-    event.preventDefault();
+  const handleUpdatePackage = async (e) => {
+    e.preventDefault();
+
+
+    const form = e.target;
+
+    const category = form.category.value;
+    const pricePerNight = form.pricePerNight.value;
+    const inclusions = form.inclusions.value;
+    const duration = form.duration.value;
+    const activities = form.activities.value;
+    const idealFor = form.idealFor.value;
+    const country = form.country.value;
+    const totalPrice = form.totalPrice.value;
+    const shortDescription = form.shortDescription.value;
+    const photoURL1 = form.photo1.value;
+    const photoURL2 = form.photo2.value;
+    const email = form.email.value;
+
 
     const updateSpot = {
-      name: event.target.name.value,
-      country: event.target.country.value,
-      location: event.target.location.value,
-      travel: event.target.travel.value,
-      photoURL1: event.target.photo1.value,
-      photoURL2: event.target.photo2.value,
-      average: event.target.average.value,
-      seasonality: event.target.seasonality.value,
-      total: event.target.total.value,
-      description: event.target.description.value,
+      category,
+      pricePerNight,
+      inclusions,
+      duration,
+      activities,
+      idealFor,
+      country,
+      totalPrice,
+      shortDescription,
+      photoURL1,
+      photoURL2,
+      email,
     };
 
     const resp = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/spot/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-packages/api/packages/${id}`,
       {
         method: "PATCH",
         body: JSON.stringify(updateSpot),
@@ -87,102 +106,134 @@ const Page = ({ params }) => {
       <div className="mx-auto">
         <div className="text-center my-12 px-10 py-7 lg:px-28 lg:py-16  lg:w-4/4 rounded-md mx-auto">
           <h2 className="text-5xl pb-7 text-black font-extrabold">
-            Update your Tourist Spot
+            Update your Package
           </h2>
           <p className="text-base leading-7 font-semibold text-black pb-5 w-2/3 mx-auto">
-            Experience the allure of our newest tourist spot! Discover
-            breathtaking landscapes, vibrant cultures, and unforgettable
-            adventures. Join us on an exploration filled with wonder and
-            excitement.
+           
           </p>
           <form
-            onSubmit={handleUpdateSpot}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6  mx-auto"
+          onSubmit={handleUpdatePackage}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto"
           >
+            {/* Left Column */}
             <div>
+              {/* Package Category */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
-                    Name
-                  </span>
-                </label>
-                <input
-                  defaultValue={spot?.name || ""}
-                  type="text"
-                  name="name"
-                  placeholder="Enter Your Tourist Spot Name"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-base text-black font-semibold">
-                    Country Name
+                    Package Category
                   </span>
                 </label>
                 <select
-                  name="country"
-                  defaultValue={spot?.country || ""}
+                defaultValue={spot?.category || ""}
+                  name="category"
                   className="select select-bordered text-base w-full"
                   required
                 >
-                  <option disabled>Select Country</option>
-                  <option>Bangladesh</option>
-                  <option>Thailand</option>
-                  <option>Indonesia</option>
-                  <option>Malaysia</option>
-                  <option>Vietnam</option>
-                  <option>Cambodia</option>
+                  <option>Select Category</option>
+                  <option>Luxury Package</option>
+                  <option>Adventure Package</option>
+                  <option>Relaxation Package</option>
+                  <option>Family Fun Package</option>
+                  <option>Cultural Experience Package</option>
                 </select>
               </div>
+
+              {/* Price Per Night */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
-                    Location
+                    Price Per Night
                   </span>
                 </label>
                 <input
-                  type="text"
-                  defaultValue={spot?.location || ""}
-                  name="location"
-                  placeholder="Enter Your Spot Location"
+                  defaultValue={spot?.pricePerNight || ""}
+                  type="number"
+                  name="pricePerNight"
+                  placeholder="Enter Price Per Night (e.g., $500)"
                   className="input input-bordered"
                   required
                 />
               </div>
-              <div className="form-control">
+               {/* Total Price */}
+               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
-                    Seasonality
+                    Total Price
                   </span>
                 </label>
                 <input
-                  type="text"
-                  defaultValue={spot?.seasonality || ""}
-                  name="seasonality"
-                  placeholder="Enter seasonality - like summer, winter"
+                                  defaultValue={spot?.totalPrice || ""}
+
+                  type="number"
+                  name="totalPrice"
+                  placeholder="Enter Total Price (e.g., $2000)"
                   className="input input-bordered"
                   required
                 />
               </div>
+
+          
+
+              {/* Duration */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
-                    Travel Time
+                    Duration
                   </span>
                 </label>
                 <input
+                                                  defaultValue={spot?.duration || ""}
+
                   type="text"
-                  defaultValue={spot?.travel || ""}
-                  name="travel"
-                  placeholder="Travel time, e.g., 7 days"
+                  name="duration"
+                  placeholder="Enter Duration (e.g., 3 days, 2 nights)"
                   className="input input-bordered"
                   required
                 />
               </div>
+
+              {/* Country */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-base text-black font-semibold">
+                    Country
+                  </span>
+                </label>
+                <input
+                defaultValue={spot?.country || ""}
+                  type="text"
+                  name="country"
+                  placeholder="Enter Country Name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+                {/* Email */}
+                <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-base text-black font-semibold">
+                    Email
+                  </span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  className="input input-bordered"
+                  defaultValue={user?.email || ''}
+                  required
+                  readOnly
+                />
+              </div>
+
+
+             
             </div>
+
+            {/* Right Column */}
             <div>
+                 {/* Photo URL 1 */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
@@ -190,76 +241,90 @@ const Page = ({ params }) => {
                   </span>
                 </label>
                 <input
+                                  defaultValue={spot?.photoURL1 || ""}
+
                   type="url"
-                  defaultValue={spot?.photoURL1 || ""}
                   name="photo1"
-                  placeholder="Enter Tourist Spot Photo URL"
+                  placeholder="Enter First Photo URL"
                   className="input input-bordered"
                   required
                 />
               </div>
-              <div className="form-control">
+ {/* Photo URL 2 */}
+ <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
                     Photo URL 2
                   </span>
                 </label>
                 <input
+                                                  defaultValue={spot?.photoURL2 || ""}
+
                   type="url"
-                  defaultValue={spot?.photoURL2 || ""}
                   name="photo2"
-                  placeholder="Enter Tourist Spot Photo URL"
+                  placeholder="Enter Second Photo URL"
                   className="input input-bordered"
                   required
                 />
               </div>
+              
+
+
+              {/* Ideal For */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
-                    Average Cost
+                    Ideal For
                   </span>
                 </label>
                 <input
-                  type="number"
-                  defaultValue={spot?.average || ""}
-                  name="average"
-                  placeholder="Enter Spot Average Cost"
+                                                  defaultValue={spot?.idealFor || ""}
+
+                  type="text"
+                  name="idealFor"
+                  placeholder="Enter Ideal For (e.g., couples, families)"
                   className="input input-bordered"
                   required
                 />
               </div>
+
+             
+
+    {/* Inclusions */}
+    <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-base text-black font-semibold">
+                    Inclusions
+                  </span>
+                </label>
+                <textarea
+                                                  defaultValue={spot?.inclusions || ""}
+
+                  name="inclusions"
+                  placeholder="Enter inclusions (e.g., spa, meals, etc.)"
+                  className="textarea textarea-bordered w-full"
+                  required
+                ></textarea>
+              </div>
+            
+              {/* Activities */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
-                    Total Visitors Per Year
+                    Activities
                   </span>
                 </label>
-                <input
-                  type="number"
-                  defaultValue={spot?.total || ""}
-                  name="total"
-                  placeholder="Total visitors per year, e.g., 10000"
-                  className="input input-bordered"
+                <textarea
+                                                                  defaultValue={spot?.activities || ""}
+
+                  name="activities"
+                  placeholder="Enter activities (e.g., scuba diving, yoga)"
+                  className="textarea textarea-bordered w-full"
                   required
-                />
+                ></textarea>
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-base text-black font-semibold">
-                    User Email
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  value={spot?.email || user?.email || ""}
-                  readOnly
-                  name="email"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-            </div>
-            <div className="md:col-span-2 space-y-6">
+             
+              {/* Short Description */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
@@ -267,15 +332,20 @@ const Page = ({ params }) => {
                   </span>
                 </label>
                 <textarea
-                  placeholder="Enter description"
-                  name="description"
-                  className="textarea textarea-bordered row-span-2 w-full"
-                  defaultValue={spot?.description || ""}
+                defaultValue={spot?.shortDescription || ""}
+                  name="shortDescription"
+                  placeholder="Enter a brief description of the package"
+                  className="textarea textarea-bordered w-full"
+                  required
                 ></textarea>
               </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="md:col-span-2 space-y-6">
               <input
                 type="submit"
-                value="Update Tourist Spot"
+                value="Update Package"
                 className="btn w-full bg-sky-500 text-base text-white border-0 rounded-md border-[#331A15]"
               />
             </div>
