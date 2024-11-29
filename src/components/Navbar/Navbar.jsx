@@ -141,7 +141,7 @@ const Navbar = () => {
           {menuOpen ? (
             <FaTimes className={`${scrolled ? "text-gray-800" : "text-white"}`} />
           ) : (
-            <FaBars />
+            <FaBars className="text-sky-500"/>
           )}
         </button>
 
