@@ -3,11 +3,11 @@ import { NextResponse } from "next/server"
 
 export const GET = async (request, {params}) => {
 const db = await connectDB()
-const packagesCollection = await db.collection('packages')
+const resortRoomCollection = await db.collection('resortRoom')
 try {
     
-const myAddedPackages = await packagesCollection.find({email : params.email}).toArray()
-return NextResponse.json({myAddedPackages})
+const myAddedResortRoom = await resortRoomCollection.find({email : params.email}).toArray()
+return NextResponse.json({myAddedResortRoom})
 } catch (error) {
     console.log(error);
 }

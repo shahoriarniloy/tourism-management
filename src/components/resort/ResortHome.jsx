@@ -17,6 +17,7 @@ const ResortHome = () => {
             <Service/> */}
             <PhotoGallery/>
             {/* <Testimonial/> */}
+            
         </div>
     );
 };
