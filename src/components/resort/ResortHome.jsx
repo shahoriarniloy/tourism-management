@@ -6,7 +6,6 @@ import PhotoGallery from './PhotoGallery';
 import Testimonial from './Testimonial';
 import Service from './Service';
 import SearchResort from './SearchResort';
-import ResortRoom from './ResortRoom';
 
 const ResortHome = () => {
     return (
@@ -18,7 +17,7 @@ const ResortHome = () => {
             <Service/> */}
             <PhotoGallery/>
             {/* <Testimonial/> */}
-            {/* <ResortRoom/> */}
+            
         </div>
     );
 };

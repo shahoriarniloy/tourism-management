@@ -55,23 +55,23 @@ const SingleResort = () => {
   return (
     <div className="resort-details">
       <div className="banner relative w-full h-60 md:h-80 lg:h-96">
-  <Image
-    src={bannerImage}
-    alt={`${name} Banner`}
-    layout="fill"
-    objectFit="cover"
-    className="w-full h-full"
-  />
-  <div className="profile-picture w-36 h-36 absolute bottom-[-40px] left-1/2 transform -translate-x-1/2">
-    <Image
-      src={profileImage}
-      alt={`${name} Profile`}
-      layout="fill"
-      objectFit="cover"
-      className="w-full h-full rounded-full border-4 border-sky-500"
-    />
-  </div>
-</div>
+        <Image
+          src={bannerImage}
+          alt={`${name} Banner`}
+          layout="fill"
+          objectFit="cover"
+          className="w-full h-full"
+        />
+        <div className="profile-picture w-36 h-36 absolute bottom-[-40px] left-1/2 transform -translate-x-1/2">
+          <Image
+            src={profileImage}
+            alt={`${name} Profile`}
+            layout="fill"
+            objectFit="cover"
+            className="w-full h-full rounded-full border-4 border-sky-500"
+          />
+        </div>
+      </div>
 
       <div className="resort-info bg-white shadow-md rounded-md mt-12 p-2 ">
         <h1 className="text-2xl font-bold text-center">{name}</h1>
@@ -80,27 +80,27 @@ const SingleResort = () => {
           {location}
         </p>
         <p className="text-gray-800  text-center"><em>{description}</em></p>
-       <div className="flex flex-col justify-center">
-       <div className="destination-type ">
-          <h3 className="text-md font-thin text-center">Destination Type:{destinationType}</h3>
-          {/* <p className="text-gray-600">{destinationType}</p> */}
-        </div>
-        
+        <div className="flex flex-col justify-center">
+          <div className="destination-type ">
+            <h3 className="text-md font-thin text-center">Destination Type:{destinationType}</h3>
+            {/* <p className="text-gray-600">{destinationType}</p> */}
+          </div>
 
-<div className="contact-info  flex lg:flex-row md:flex-row flex-col justify-center items-center lg:gap-2 md:gap-2">
-  <h3 className="text-md font-thin">Contact Information:</h3>
-  <p className="text-gray-600 flex items-center">
-    <FaPhoneAlt className="text-sky-500 mr-2" />
-    <span className="font-thin">Phone: </span>
-    <span className="ml-1">{phone}</span>
-  </p>
-  <p className="text-gray-600 flex items-center ">
-    <FaEnvelope className="text-sky-500 mr-2" />
-    <span className="font-thin">Email: </span>
-    <span className="ml-1">{email}</span>
-  </p>
-</div>
-       </div>
+
+          <div className="contact-info  flex lg:flex-row md:flex-row flex-col justify-center items-center lg:gap-2 md:gap-2">
+            <h3 className="text-md font-thin">Contact Information:</h3>
+            <p className="text-gray-600 flex items-center">
+              <FaPhoneAlt className="text-sky-500 mr-2" />
+              <span className="font-thin">Phone: </span>
+              <span className="ml-1">{phone}</span>
+            </p>
+            <p className="text-gray-600 flex items-center ">
+              <FaEnvelope className="text-sky-500 mr-2" />
+              <span className="font-thin">Email: </span>
+              <span className="ml-1">{email}</span>
+            </p>
+          </div>
+        </div>
 
       </div>
 
