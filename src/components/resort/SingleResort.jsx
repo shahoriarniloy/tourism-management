@@ -4,10 +4,20 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import Packages from "./Packages";
 
 
-const SingleResort = () => {
+const getPackages = async () => { 
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packagesServices/api/get-all`)
+  const data = await res.json();
+  return data?.packages;
+
+}
+
+const SingleResort =async () => {
 
 
+  const packages = await getPackages() || [];
 
+  console.log(packages);
 
 
   const resort = {
@@ -146,9 +156,19 @@ const SingleResort = () => {
         <h2 className="text-xl font-bold mt-5 mb-2">Available Packages</h2>
 
 
-<Packages  />
+
 
       </div>
+
+
+<Packages  />
+
+
+
+
+
+
+
     </div>
   );
 };
