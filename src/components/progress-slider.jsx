@@ -14,7 +14,9 @@ const ProgressSliderContext = createContext(undefined);
 export const useProgressSliderContext = () => {
   const context = useContext(ProgressSliderContext);
   if (!context) {
-    throw new Error('useProgressSliderContext must be used within a ProgressSlider');
+    throw new Error(
+      'useProgressSliderContext must be used within a ProgressSlider'
+    );
   }
   return context;
 };
@@ -47,33 +49,36 @@ export const ProgressSlider = ({
     }
   }, [children]);
 
-  const animate = useCallback((now) => {
-    const currentDuration = isFastForward ? fastDuration : duration;
-    const elapsedTime = now - firstFrameTime.current;
-    const timeFraction = elapsedTime / currentDuration;
-    if (timeFraction <= 1) {
-      setProgress(
-        isFastForward
-          ? progress + (100 - progress) * timeFraction
-          : timeFraction * 100
-      );
-      frame.current = requestAnimationFrame(animate);
-    } else {
-      if (isFastForward) {
-        setIsFastForward(false);
-        if (targetValue.current !== null) {
-          setActive(targetValue.current);
-          targetValue.current = null;
-        }
+  const animate = useCallback(
+    (now) => {
+      const currentDuration = isFastForward ? fastDuration : duration;
+      const elapsedTime = now - firstFrameTime.current;
+      const timeFraction = elapsedTime / currentDuration;
+      if (timeFraction <= 1) {
+        setProgress((prevProgress) =>
+          isFastForward
+            ? prevProgress + (100 - prevProgress) * timeFraction
+            : timeFraction * 100
+        );
+        frame.current = requestAnimationFrame(animate);
       } else {
-        const currentIndex = sliderValues.indexOf(active);
-        const nextIndex = (currentIndex + 1) % sliderValues.length;
-        setActive(sliderValues[nextIndex]);
+        if (isFastForward) {
+          setIsFastForward(false);
+          if (targetValue.current !== null) {
+            setActive(targetValue.current);
+            targetValue.current = null;
+          }
+        } else {
+          const currentIndex = sliderValues.indexOf(active);
+          const nextIndex = (currentIndex + 1) % sliderValues.length;
+          setActive(sliderValues[nextIndex]);
+        }
+        setProgress(0);
+        firstFrameTime.current = performance.now();
       }
-      setProgress(0);
-      firstFrameTime.current = performance.now();
-    }
-  }, [isFastForward, duration, fastDuration, progress, sliderValues, active]);
+    },
+    [isFastForward, fastDuration, duration, sliderValues, active]
+  );
 
   useEffect(() => {
     if (sliderValues.length > 0) {
@@ -97,7 +102,9 @@ export const ProgressSlider = ({
   };
 
   return (
-    <ProgressSliderContext.Provider value={{ active, progress, handleButtonClick, vertical }}>
+    <ProgressSliderContext.Provider
+      value={{ active, progress, handleButtonClick, vertical }}
+    >
       <div className={cn('relative', className)}>{children}</div>
     </ProgressSliderContext.Provider>
   );
@@ -131,10 +138,14 @@ export const SliderBtnGroup = ({ children, className }) => {
 };
 
 export const SliderBtn = ({ children, value, className, progressBarClass }) => {
-  const { active, progress, handleButtonClick, vertical } = useProgressSliderContext();
+  const { active, progress, handleButtonClick, vertical } =
+    useProgressSliderContext();
   return (
     <button
-      className={cn(`relative ${active === value ? 'opacity-100' : 'opacity-50'}`, className)}
+      className={cn(
+        `relative ${active === value ? 'opacity-100' : 'opacity-50'}`,
+        className
+      )}
       onClick={() => handleButtonClick(value)}
     >
       {children}
@@ -146,7 +157,8 @@ export const SliderBtn = ({ children, value, className, progressBarClass }) => {
         <span
           className={cn('absolute left-0 ', progressBarClass)}
           style={{
-            [vertical ? 'height' : 'width']: active === value ? `${progress}%` : '0%',
+            [vertical ? 'height' : 'width']:
+              active === value ? `${progress}%` : '0%',
           }}
         />
       </div>

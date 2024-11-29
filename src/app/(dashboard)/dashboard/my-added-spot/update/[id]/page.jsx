@@ -9,13 +9,22 @@ const Page = ({ params }) => {
 
   const [spot, setSpot] = useState({});
   const [loading, setLoading] = useState(true);
+  const [id, setId] = useState(null);
 
-  const { id } = params;
+  // Unwrap params using React.use()
+  useEffect(() => {
+    async function unwrapParams() {
+      const resolvedParams = await params;
+      setId(resolvedParams.id);
+    }
+    unwrapParams();
+  }, [params]);
 
   const loadSpot = useCallback(async () => {
+    if (!id) return;
     try {
       const spotDetail = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`
+        `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/spot/${id}`
       );
       const data = await spotDetail.json();
       console.log(data);
@@ -44,7 +53,7 @@ const Page = ({ params }) => {
     };
 
     const resp = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/my-added-spot/api/spot/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/dashboard/my-added-spot/api/spot/${id}`,
       {
         method: "PATCH",
         body: JSON.stringify(updateSpot),
@@ -75,8 +84,8 @@ const Page = ({ params }) => {
 
   return (
     <div className="px-4 md:px-0 my-12 max-w-[1280px] mx-auto">
-      <div className=" mx-auto">
-        <div className="text-center my-12 px-10 py-7 lg:px-28 lg:py-16 bg-[#eaeaea] lg:w-4/4 rounded-md mx-auto">
+      <div className="mx-auto">
+        <div className="text-center my-12 px-10 py-7 lg:px-28 lg:py-16  lg:w-4/4 rounded-md mx-auto">
           <h2 className="text-5xl pb-7 text-black font-extrabold">
             Update your Tourist Spot
           </h2>
@@ -267,7 +276,7 @@ const Page = ({ params }) => {
               <input
                 type="submit"
                 value="Update Tourist Spot"
-                className="btn w-full bg-orange-600 text-base text-white border-0 rounded-md border-[#331A15]"
+                className="btn w-full bg-sky-500 text-base text-white border-0 rounded-md border-[#331A15]"
               />
             </div>
           </form>

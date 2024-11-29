@@ -30,9 +30,9 @@ const {data:session} = useSession()
         const newSpot = {
         name,country,location, travel,  photoURL1, photoURL2, average,seasonality, total,email, description
         }
-       
+
         
-        fetch( `${process.env.NEXT_PUBLIC_API_URL}/addDestinations/api`, {
+        fetch( `${process.env.NEXT_PUBLIC_API_URL}/dashboard/addDestinations/api`, {
         method: 'POST',
         headers: {
         'content-type': 'application/json'
@@ -48,7 +48,7 @@ const {data:session} = useSession()
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Your work has been saved",
+                    title: "Destination added successfully",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -64,11 +64,11 @@ const {data:session} = useSession()
         
 
     return (
-        <div className="px-4 md:px-0 my-12 max-w-[1280px] mx-auto ">
+        <div className="lg:px-4 md:px-0   mx-auto ">
 
-          <div className=" mx-auto">
-            <div className="text-center my-12 px-10 py-7 lg:px-28 lg:py-16 lg:w-4/4 rounded-md mx-auto">
-              <h2 className="text-5xl pb-7 text-black font-extrabold">
+          <div className=" mx-auto bg-white rounded-md lg:p-8 ">
+            <div className="text-center px-10 py-7 lg:px-6  lg:py-2 lg:w-4/4 rounded-md mx-auto">
+              <h2 className="text-3xl pb-7 text-black font-extrabold">
                 Add a New Tourist Spot
               </h2>
               
