@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { ChevronsRight } from 'lucide-react';
+import Link from 'next/link';
 
 function TopResorts() {
     const resorts = [
@@ -74,9 +75,9 @@ function TopResorts() {
                 <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-300 space-y-2 bg-sky-500 p-6 rounded-md ">
                   <h1 className="md:text-2xl font-semibold">{resort.name}</h1>
                   <p className="sm:text-base text-sm">{resort.description}</p>
-                  <button className="p-2  flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-all">
-                    See Details <ChevronsRight />
-                  </button>
+                  <Link href="/resort"><button className="p-2  flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-all">
+                     See Details <ChevronsRight />
+                  </button></Link>
                 </div>
               </article>
   
