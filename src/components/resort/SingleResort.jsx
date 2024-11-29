@@ -153,7 +153,7 @@ const SingleResort =async () => {
             <p className="text-gray-600">No rooms available at the moment.</p>
           )}
         </div>
-        <h2 className="text-xl font-bold mt-5 mb-2">Available Packages</h2>
+        <h2 className="text-xl font-bold mt-5 mb-2 text-green-600">Available Packages</h2>
 
 
 
