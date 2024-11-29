@@ -1,9 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import Packages from "./Packages";
 
 
 const SingleResort = () => {
+
+
+
+
+
   const resort = {
     bannerImage:
       "https://i.ibb.co/HB0tX6t/building-decorated-indian-republic-day-1.jpg",
@@ -40,6 +46,10 @@ const SingleResort = () => {
       },
     ],
   };
+
+
+
+
 
   const {
     bannerImage,
@@ -133,6 +143,11 @@ const SingleResort = () => {
             <p className="text-gray-600">No rooms available at the moment.</p>
           )}
         </div>
+        <h2 className="text-xl font-bold mt-5 mb-2">Available Packages</h2>
+
+
+<Packages  />
+
       </div>
     </div>
   );
