@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaMapMarkerAlt, FaList, FaCog } from "react-icons/fa";
+import { FaMapMarkerAlt, FaList, FaCog, FaMapPin, FaRegListAlt, FaBoxOpen, FaClipboardList, FaBed, FaListUl, FaListAlt, FaTools } from "react-icons/fa";
 import { IoMenu, IoClose } from "react-icons/io5";
 
 const DashboardSidebar = () => {
@@ -25,7 +25,7 @@ const DashboardSidebar = () => {
       </button>
 
       <aside
-        className={`fixed inset-y-0 left-0 lg:relative lg:w-64 w-64 bg-gradient-to-r from-sky-500 to-sky-700 text-white flex flex-col h-screen p-4 space-y-4 transition-transform duration-300 ease-in-out z-40 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        className={`fixed inset-y-0 left-0 lg:relative  bg-gradient-to-r from-sky-500 to-sky-700 text-white flex flex-col h-screen p-4 space-y-4 transition-transform duration-300 ease-in-out z-40 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
           }`}
       >
         <div className="lg:hidden flex justify-between items-center p-4 ">
@@ -66,6 +66,7 @@ const DashboardSidebar = () => {
         </div>
 
         <nav className="flex-1 p-4 space-y-4 h-screen ">
+
           <Link href="/dashboard/addDestinations">
             <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
               <FaMapMarkerAlt className="mr-2 text-xl" /> Add Destination

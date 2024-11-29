@@ -1,9 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import Packages from "./Packages";
 
 
-const SingleResort = () => {
+const getPackages = async () => { 
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packagesServices/api/get-all`)
+  const data = await res.json();
+  return data?.packages;
+
+}
+
+const SingleResort =async () => {
+
+
+  const packages = await getPackages() || [];
+
+  console.log(packages);
+
+
   const resort = {
     bannerImage:
       "https://i.ibb.co/HB0tX6t/building-decorated-indian-republic-day-1.jpg",
@@ -40,6 +56,10 @@ const SingleResort = () => {
       },
     ],
   };
+
+
+
+
 
   const {
     bannerImage,
@@ -133,7 +153,22 @@ const SingleResort = () => {
             <p className="text-gray-600">No rooms available at the moment.</p>
           )}
         </div>
+        <h2 className="text-xl font-bold mt-5 mb-2 text-green-600">Available Packages</h2>
+
+
+
+
       </div>
+
+
+<Packages  />
+
+
+
+
+
+
+
     </div>
   );
 };
