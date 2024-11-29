@@ -1,15 +1,45 @@
-"use client";  // Add this line at the top
+"use client";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 
-import { useSession } from 'next-auth/react';
-import React from 'react';
-import Swal from 'sweetalert2';
-
-const AddResortRoom = () => {
+const Page = ({ params }) => {
     const { data: session } = useSession();
     const user = session?.user;
 
-    const handleAddResortRoom = (e) => {
+    const [room, setRoom] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [id, setId] = useState(null);
+
+    // Unwrap params using React.use()
+    useEffect(() => {
+        async function unwrapParams() {
+            const resolvedParams = await params;
+            setId(resolvedParams.id);
+        }
+        unwrapParams();
+    }, [params]);
+
+    const loadRoom = useCallback(async () => {
+        if (!id) return;
+        try {
+            const resortRoomDetail = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/dashboard/myResortRoom/api/resortRoom/${id}`
+            );
+            const data = await resortRoomDetail.json();
+            console.log(data);
+            setRoom(data?.data || {});
+            setLoading(false);
+        } catch (error) {
+            console.error("Failed to load Resort Room Data:", error);
+            setLoading(false);
+        }
+    }, [id]);
+
+    const handleUpdateResortRoom = async (e) => {
         e.preventDefault();
+
+
         const form = e.target;
 
         const roomID = form.roomID.value;
@@ -23,34 +53,40 @@ const AddResortRoom = () => {
         const description = form.description.value;
         const email = user ? user?.email : '';
 
-        const newRoom = {
+
+        const updateResortRoom = {
             roomID, roomName, roomNo, roomType, pricePerNight, photoURL1, photoURL2, capacity, email, description
-        }
+        };
 
-        console.log(newRoom);
+        const resp = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/dashboard/myResortRoom/api/resortRoom/${id}`,
+            {
+                method: "PATCH",
+                body: JSON.stringify(updateResortRoom),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
 
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/dashboard/addResortRoom/api`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newRoom)
-        })
-            .then(res => res.json())
-            .then(data => {
-                const { insertedId } = data.result;
-                if (insertedId) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Resort Room added successfully",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-                e.target.reset();
+        if (resp.status === 200) {
+            Swal.fire({
+                position: "top",
+                icon: "success",
+                title: "Successfully Updated",
+                showConfirmButton: false,
+                timer: 1500,
             });
+        }
     };
+
+    useEffect(() => {
+        loadRoom();
+    }, [id, loadRoom]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div>
@@ -58,10 +94,10 @@ const AddResortRoom = () => {
                 <div className="bg-gradient-to-r from-blue-700 to-blue-300 w-full h-36"></div>
                 <div className="-mt-20 mb-6 px-4">
                     <div className="mx-auto max-w-6xl shadow-lg p-8 relative bg-white rounded-lg">
-                        <h2 className="text-xl text-gray-800 font-bold">Add Resort Room</h2>
+                        <h2 className="text-xl text-gray-800 font-bold">Update Resort Room</h2>
 
                         <form
-                            onSubmit={handleAddResortRoom}
+                            onSubmit={handleUpdateResortRoom}
                             className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto"
                         >
                             {/* First column - Room Details */}
@@ -75,6 +111,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <input
+                                        defaultValue={room?.roomID || ""}
                                             type="text"
                                             name="roomID"
                                             placeholder="Enter Your Room ID"
@@ -91,6 +128,7 @@ const AddResortRoom = () => {
                                         </label>
                                         <select
                                             name="roomName"
+                                            defaultValue={room?.roomName || ""}
                                             className="select select-bordered text-base w-full"
                                         >
                                             <option>Select Room Name</option>
@@ -109,6 +147,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <select
+                                        defaultValue={room?.roomType || ""}
                                             name="roomType"
                                             className="select select-bordered text-base w-full"
                                         >
@@ -127,6 +166,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <input
+                                        defaultValue={room?.roomNo || ""}
                                             type="text"
                                             name="roomNo"
                                             placeholder="Enter Room No"
@@ -145,6 +185,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <input
+                                        defaultValue={room?.pricePerNight || ""}
                                             type="number"
                                             name="pricePerNight"
                                             placeholder="Enter Price Per Night"
@@ -160,6 +201,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <input
+                                        defaultValue={room?.capacity || ""}
                                             type="number"
                                             name="capacity"
                                             placeholder="Capacity"
@@ -181,6 +223,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <input
+                                         defaultValue={room?.photoURL1 || ""}
                                             type="url"
                                             name="photo1"
                                             placeholder="Enter Room Photo URL"
@@ -196,6 +239,7 @@ const AddResortRoom = () => {
                                             </span>
                                         </label>
                                         <input
+                                        defaultValue={room?.photoURL2 || ""}
                                             type="url"
                                             name="photo2"
                                             placeholder="Enter Room Spot Photo URL"
@@ -233,6 +277,7 @@ const AddResortRoom = () => {
                                         </span>
                                     </label>
                                     <textarea
+                                    defaultValue={room?.description || ""}
                                         placeholder="Short Description"
                                         name="description"
                                         className="textarea textarea-bordered w-full"
@@ -252,4 +297,4 @@ const AddResortRoom = () => {
     );
 };
 
-export default AddResortRoom;
+export default Page;

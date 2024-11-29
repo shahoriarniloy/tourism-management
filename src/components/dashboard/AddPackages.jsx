@@ -111,8 +111,8 @@ const AddPackages = () => {
                   required
                 />
               </div>
-               {/* Total Price */}
-               <div className="form-control">
+              {/* Total Price */}
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
                     Total Price
@@ -127,7 +127,7 @@ const AddPackages = () => {
                 />
               </div>
 
-          
+
 
               {/* Duration */}
               <div className="form-control">
@@ -160,8 +160,8 @@ const AddPackages = () => {
                   required
                 />
               </div>
-                {/* Email */}
-                <div className="form-control">
+              {/* Email */}
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
                     Email
@@ -179,12 +179,12 @@ const AddPackages = () => {
               </div>
 
 
-             
+
             </div>
 
             {/* Right Column */}
             <div>
-                 {/* Photo URL 1 */}
+              {/* Photo URL 1 */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
@@ -199,8 +199,8 @@ const AddPackages = () => {
                   required
                 />
               </div>
- {/* Photo URL 2 */}
- <div className="form-control">
+              {/* Photo URL 2 */}
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
                     Photo URL 2
@@ -214,7 +214,7 @@ const AddPackages = () => {
                   required
                 />
               </div>
-              
+
 
 
               {/* Ideal For */}
@@ -233,10 +233,10 @@ const AddPackages = () => {
                 />
               </div>
 
-             
 
-    {/* Inclusions */}
-    <div className="form-control">
+
+              {/* Inclusions */}
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text text-base text-black font-semibold">
                     Inclusions
@@ -249,7 +249,7 @@ const AddPackages = () => {
                   required
                 ></textarea>
               </div>
-            
+
               {/* Activities */}
               <div className="form-control">
                 <label className="label">
@@ -264,7 +264,7 @@ const AddPackages = () => {
                   required
                 ></textarea>
               </div>
-             
+
               {/* Short Description */}
               <div className="form-control">
                 <label className="label">

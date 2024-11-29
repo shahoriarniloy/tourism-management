@@ -91,6 +91,11 @@ const DashboardSidebar = () => {
               <FaMapMarkerAlt className="mr-2 text-xl" /> Add Resort Room
             </span>
           </Link>
+          <Link href="/dashboard/myResortRoom">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaList className="mr-2 text-xl" /> Resort Room List
+            </span>
+          </Link>
           <Link href="/dashboard/myResort">
             <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
               <FaCog className="mr-2 text-xl" /> Settings
