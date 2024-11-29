@@ -55,54 +55,56 @@ const SingleResort = () => {
   return (
     <div className="resort-details">
       <div className="banner relative w-full h-60 md:h-80 lg:h-96">
-        <Image
-          src={bannerImage}
-          alt={`${name} Banner`}
-          layout="fill"
-          objectFit="cover"
-          className="w-full h-full"
-        />
-        <div className="profile-picture w-36 h-36 absolute bottom-[-40px] left-8">
-          <Image
-            src={profileImage}
-            alt={`${name} Profile`}
-            layout="fill"
-            objectFit="cover"
-            className="w-full h-full rounded-full border-4 border-sky-500"
-          />
-        </div>
-      </div>
+  <Image
+    src={bannerImage}
+    alt={`${name} Banner`}
+    layout="fill"
+    objectFit="cover"
+    className="w-full h-full"
+  />
+  <div className="profile-picture w-36 h-36 absolute bottom-[-40px] left-1/2 transform -translate-x-1/2">
+    <Image
+      src={profileImage}
+      alt={`${name} Profile`}
+      layout="fill"
+      objectFit="cover"
+      className="w-full h-full rounded-full border-4 border-sky-500"
+    />
+  </div>
+</div>
 
-      <div className="resort-info bg-white shadow-md rounded-md mt-12 p-6">
-        <h1 className="text-2xl font-bold">{name}</h1>
-        <p className="text-gray-600 mt-2 flex items-center">
+      <div className="resort-info bg-white shadow-md rounded-md mt-12 p-2 ">
+        <h1 className="text-2xl font-bold text-center">{name}</h1>
+        <p className="text-gray-600 mt-2 flex justify-center items-center">
           <FaMapMarkerAlt className="text-sky-500 mr-2" />
           {location}
         </p>
-        <p className="text-gray-800 mt-4">{description}</p>
-        <div className="destination-type mt-4">
-          <h3 className="text-lg font-semibold">Destination Type:</h3>
-          <p className="text-gray-600">{destinationType}</p>
+        <p className="text-gray-800  text-center"><em>{description}</em></p>
+       <div className="flex flex-col justify-center">
+       <div className="destination-type ">
+          <h3 className="text-md font-thin text-center">Destination Type:{destinationType}</h3>
+          {/* <p className="text-gray-600">{destinationType}</p> */}
         </div>
         
 
-<div className="contact-info mt-4">
-  <h3 className="text-lg font-semibold">Contact Information:</h3>
+<div className="contact-info  flex lg:flex-row md:flex-row flex-col justify-center items-center lg:gap-2 md:gap-2">
+  <h3 className="text-md font-thin">Contact Information:</h3>
   <p className="text-gray-600 flex items-center">
     <FaPhoneAlt className="text-sky-500 mr-2" />
-    <span className="font-semibold">Phone: </span>
+    <span className="font-thin">Phone: </span>
     <span className="ml-1">{phone}</span>
   </p>
-  <p className="text-gray-600 flex items-center mt-2">
+  <p className="text-gray-600 flex items-center ">
     <FaEnvelope className="text-sky-500 mr-2" />
-    <span className="font-semibold">Email: </span>
+    <span className="font-thin">Email: </span>
     <span className="ml-1">{email}</span>
   </p>
 </div>
+       </div>
 
       </div>
 
-      <div className="relative available-rooms mt-8">
+      <div className="relative available-rooms mt-8 mx-24 px-4">
         <h2 className="text-xl font-bold">Available Rooms</h2>
         <div className="room-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           {availableRooms.length > 0 ? (

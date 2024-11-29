@@ -64,9 +64,9 @@ const {data:session} = useSession()
         
 
     return (
-        <div className="px-4 md:px-0   mx-auto ">
+        <div className="lg:px-4 md:px-0   mx-auto ">
 
-          <div className=" mx-auto bg-white rounded-md p-8 ">
+          <div className=" mx-auto bg-white rounded-md lg:p-8 ">
             <div className="text-center px-10 py-7 lg:px-6  lg:py-2 lg:w-4/4 rounded-md mx-auto">
               <h2 className="text-3xl pb-7 text-black font-extrabold">
                 Add a New Tourist Spot

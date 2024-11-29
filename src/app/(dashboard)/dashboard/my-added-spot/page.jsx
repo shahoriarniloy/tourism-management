@@ -6,10 +6,13 @@ import { GrUpdate } from "react-icons/gr";
 import Link from "next/link";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import DestinationDetailModal from "@/components/DestinationDetailModal";
 
 const Page = () => {
   const session = useSession();
   const [spots, setSpots] = useState([]);
+  const [showModal, setShowModal] = useState(false); // To control modal visibility
+  const [selectedSpot, setSelectedSpot] = useState(null); // To store selected spot details
 
   const loadData = useCallback(async () => {
     if (session?.data?.user?.email) {
@@ -44,17 +47,24 @@ const Page = () => {
     });
   };
 
+  const handleShowDetails = (spot) => {
+    setSelectedSpot(spot);
+    setShowModal(true);  // Show the modal
+  };
+
+  const closeModal = () => {
+    setShowModal(false);  // Close the modal
+  };
+
   useEffect(() => {
     if (session?.data?.user?.email) {
       loadData();
     }
   }, [session?.data?.user?.email, loadData]);
 
-  console.log(spots);
-
   return (
     <div className="container mx-auto p-4">
-      <div className="my-4 bg-gradient-to-r from-sky-500 to-sky-700 rounded-xl  py-4 text-center text-lg text-white font-bold shadow-lg">
+      <div className="my-4 bg-gradient-to-r from-sky-500 to-sky-700 rounded-xl py-4 text-center text-lg text-white font-bold shadow-lg">
         <h2 className="mr-2">Here Are All Your Created Spots</h2>
       </div>
 
@@ -62,37 +72,37 @@ const Page = () => {
         <table className="table-auto w-full">
           <thead className="text-white bg-gradient-to-r from-sky-500 to-sky-700">
             <tr>
-              <th className="px-4 py-2">#</th>
-              <th className="px-4 py-2">Images</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Price</th>
-              <th className="px-4 py-2">Update</th>
-              <th className="px-4 py-2">Delete</th>
+              <th className="px-4 py-2 text-xs sm:text-sm">#</th>
+              <th className="px-4 py-2 text-xs sm:text-sm">Name</th>
+              <th className="px-4 py-2 text-xs sm:text-sm">Details</th>
+              <th className="px-4 py-2 text-xs sm:text-sm hidden sm:table-cell">Update</th>
+              <th className="px-4 py-2 text-xs sm:text-sm hidden sm:table-cell">Delete</th>
+              <th className="px-4 py-2 text-xs sm:text-sm sm:hidden">Actions</th>
             </tr>
           </thead>
           <tbody>
             {spots.map((spot, index) => (
               <tr key={spot._id} className="hover:bg-gray-100">
-                <td className="border px-4 py-2 text-center">{index + 1}</td>
-                <td className="border px-4 py-2 text-center">
-                  <Image
-                    alt={`image`}
-                    src={spot?.photoURL1}
-                    height={100}
-                    width={100}
-                    className="rounded-lg"
-                  />
+                <td className="border px-4 py-2 text-center text-xs sm:text-sm">{index + 1}</td>
+                <td className="border px-4 py-2 text-center text-xs sm:text-sm">{spot?.name}</td>
+
+                <td className="border px-4 py-2 text-center text-xs sm:text-sm">
+                  <button
+                    onClick={() => handleShowDetails(spot)} // Show details when button is clicked
+                    className="btn bg-sky-500 hover:bg-sky-400 text-white px-4 py-2 rounded-lg shadow-md"
+                  >
+                    Details
+                  </button>
                 </td>
-                <td className="border px-4 py-2 text-center">{spot?.name}</td>
-                <td className="border px-4 py-2 text-center">{spot?.average}$</td>
-                <td className="border px-4 py-2 text-center">
-                  <Link href={`/dashboard/my-added-spot/update/${spot?._id}`} className="">
+
+                <td className="border px-4 py-2 text-center hidden sm:table-cell">
+                  <Link href={`/dashboard/my-added-spot/update/${spot?._id}`}>
                     <button className="btn bg-sky-500 hover:bg-sky-400 text-white px-4 py-2 rounded-lg shadow-md">
                       <GrUpdate className="text-white text-xl font-bold" />
                     </button>
                   </Link>
                 </td>
-                <td className="border px-4 py-2 text-center">
+                <td className="border px-4 py-2 text-center hidden sm:table-cell">
                   <button
                     onClick={() => handleDeleteItem(spot?._id)}
                     className="btn bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-lg shadow-md"
@@ -100,11 +110,32 @@ const Page = () => {
                     <RiDeleteBin6Fill className="text-white text-xl font-bold" />
                   </button>
                 </td>
+
+                <td className="border px-4 py-2 text-center sm:hidden">
+                  <div className="flex justify-center space-x-2">
+                    <Link href={`/dashboard/my-added-spot/update/${spot?._id}`}>
+                      <button className="btn bg-sky-500 hover:bg-sky-400 text-white px-4 py-2 rounded-lg shadow-md">
+                        <GrUpdate className="text-white text-xl font-bold" />
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteItem(spot?._id)}
+                      className="btn bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-lg shadow-md"
+                    >
+                      <RiDeleteBin6Fill className="text-white text-xl font-bold" />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* Conditionally render the modal if it's visible */}
+      {showModal && selectedSpot && (
+        <DestinationDetailModal spot={selectedSpot} closeModal={closeModal} />
+      )}
     </div>
   );
 };
