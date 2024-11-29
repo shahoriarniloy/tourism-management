@@ -6,11 +6,11 @@ function Footer() {
   return (
     <>
       <footer
-        className="footer-bg bg-sky-500  relative border h-fit pt-12 w-full mx-auto rounded-lg overflow-hidden radial-gradient-bg
+        className=" bg-gradient-to-r from-sky-500 to-sky-700 relative border h-fit pt-12 w-full mx-auto rounded-lg overflow-hidden radial-gradient-bg
                    [--gradient-center:#4A90E2] [--gradient-edge:#1C2D45]
                    dark:[--gradient-center:#02081765] dark:[--gradient-edge:#020817]"
       >
-        <div className="gap-10 sm:flex justify-between p-12 2xl:py-10 py-5 bg-sky-500 rounded-sm rounded-b-none text-white">
+        <div className="gap-10 sm:flex justify-between p-12 2xl:py-10 py-5  rounded-sm rounded-b-none text-white">
           <div className="w-fit flex-col flex justify-center">
             <article className="py-2 2xl:w-80 w-64 space-y-1">
               <h1 className="newFont text-3xl font-bold">TrailBliss</h1>
@@ -77,7 +77,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="bg-sky-500 text-center py-4 text-white">
+        <div className=" text-center py-4 text-white">
           <p className="text-sm">
             &copy; {new Date().getFullYear()} TrailBliss. All rights reserved.
           </p>
