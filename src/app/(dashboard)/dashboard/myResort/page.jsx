@@ -130,7 +130,11 @@ const UpdateResortPage = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <div className="flex justify-center items-center"><span className="flex justify-center items-center">
+    <div className="w-24 h-24 border-4 border-gray-300 border-t-sky-500 rounded-full animate-spin"></div>
+  </span>
+      </div>
+  ;
   }
 
   return (

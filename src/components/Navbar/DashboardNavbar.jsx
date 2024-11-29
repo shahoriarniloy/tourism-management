@@ -2,15 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'; 
+import { FaHome } from "react-icons/fa";
+
 
 const DashboardNavbar = () => {
   const { data: session } = useSession();
 
   return (
     <div>
-      <header className="h-16 bg-white flex items-center justify-between px-6">
-        <Link href="/" className="text-lg font-semibold">
-          Home
+      <header className="h-16 bg-white flex items-center justify-between px-6 border-b-2">
+        <Link href="/" className="text-3xl text-sky-500 font-semibold">
+          <FaHome/>
         </Link>
 
         <div className="flex items-center space-x-4 relative">
@@ -29,7 +31,9 @@ const DashboardNavbar = () => {
               </div>
             </div>
           ) : (
-            <span>Loading...</span> 
+<span className="flex justify-center items-center">
+  <div className="w-6 h-6 border-4 border-gray-300 border-t-sky-500 rounded-full animate-spin"></div>
+</span>
           )}
         </div>
       </header>

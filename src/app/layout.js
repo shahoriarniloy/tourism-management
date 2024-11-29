@@ -20,7 +20,8 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           {isDashboard ? (
-            <div className="flex h-screen lg:max-w-[1500px]">
+            <div>
+               <div className="flex h-screen lg:max-w-[1500px]">
               <DashboardSidebar/>
 
               <div className="flex-1 flex flex-col">
@@ -30,7 +31,12 @@ export default function RootLayout({ children }) {
                   {children}
                 </main>
               </div>
+              
             </div>
+            {/* <Footer /> */}
+
+            </div>
+           
           ) : (
             <>
               <Navbar />
