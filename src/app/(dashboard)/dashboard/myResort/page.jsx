@@ -10,21 +10,21 @@ const UpdateResortPage = () => {
   const [resort, setResort] = useState({});
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null); 
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     const fetchResort = async () => {
       if (!session?.data?.user?.email) return;
-  
+
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/dashboard/myResort/api/${session?.data?.user?.email}`
         );
         const data = await response.json();
-  
+
         if (data && data.myResort) {
           setResort(data.myResort);
-          setImagePreview(data.myResort.imageUrl); 
+          setImagePreview(data.myResort.imageUrl);
         } else {
           Swal.fire({
             icon: "error",
@@ -43,14 +43,14 @@ const UpdateResortPage = () => {
         setLoading(false);
       }
     };
-  
+
     fetchResort();
   }, [session?.data?.user?.email]);
-  
+
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     setImage(selectedFile);
-    setImagePreview(URL.createObjectURL(selectedFile)); 
+    setImagePreview(URL.createObjectURL(selectedFile));
   };
 
   const handleRemoveImage = () => {
@@ -88,7 +88,7 @@ const UpdateResortPage = () => {
     try {
       let imageUrl = null;
       if (image) {
-        imageUrl = await uploadImageToImgBB(image); 
+        imageUrl = await uploadImageToImgBB(image);
       }
 
       const response = await fetch(
@@ -97,7 +97,7 @@ const UpdateResortPage = () => {
           method: "PATCH",
           body: JSON.stringify({
             ...updatedResort,
-            imageUrl, 
+            imageUrl,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -131,10 +131,10 @@ const UpdateResortPage = () => {
 
   if (loading) {
     return <div className="flex justify-center items-center"><span className="flex justify-center items-center">
-    <div className="w-24 h-24 border-4 border-gray-300 border-t-sky-500 rounded-full animate-spin"></div>
-  </span>
-      </div>
-  ;
+      <div className="w-24 h-24 border-4 border-gray-300 border-t-sky-500 rounded-full animate-spin"></div>
+    </span>
+    </div>
+      ;
   }
 
   return (
