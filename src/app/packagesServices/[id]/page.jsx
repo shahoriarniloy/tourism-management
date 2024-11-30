@@ -39,72 +39,59 @@ const PackagePage = ({ params }) => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        {/* Image Carousel */}
-        <Carousel showThumbs={false} infiniteLoop useKeyboardArrows autoPlay>
-          {pac?.photoURL1 && (
-            <div>
-              <Image
-                src={pac?.photoURL1}
-                alt="Package Image 1"
-                className="w-full h-full object-cover"
-                width={864}
-                height={256}
-              />
-            </div>
-          )}
-          {pac?.photoURL2 && (
-            <div>
-              <Image
-                src={pac?.photoURL2}
-                alt="Package Image 2"
-                className="w-full h-full object-cover"
-                width={864}
-                height={256}
-              />
-            </div>
-          )}
-          {/* Add more images as needed */}
-        </Carousel>
+    <div className="mx-auto mb-4">
+      <div className="bg-sky-700 h-16 mb-6"></div>
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden flex mx-24 px-4 py-8">
+        <div className="w-1/2 p-4">
+          <Carousel showThumbs={false} infiniteLoop useKeyboardArrows autoPlay>
+            {pac?.photoURL1 && (
+              <div className="h-64 w-full">
+                <Image
+                  src={pac?.photoURL1}
+                  alt="Package Image 1"
+                  className="w-full h-full object-cover"
+                  layout="fill" 
+                />
+              </div>
+            )}
+            {pac?.photoURL2 && (
+              <div className="h-96 w-full">
+                <Image
+                  src={pac?.photoURL2}
+                  alt="Package Image 2"
+                  className="w-full h-full object-cover"
+                  layout="fill" 
+                />
+              </div>
+            )}
+          </Carousel>
+        </div>
 
-        {/* Package Details */}
-        <div className="p-6">
-          <h2 className="text-3xl font-semibold text-blue-700">{pac?.category}</h2> {/* Blue color for category */}
-          <p className="text-gray-700 text-lg mt-2">{pac?.shortDescription}</p> {/* Dark Gray color for short description */}
+        <div className="w-1/2 py-2 px-6">
+          <h2 className="text-3xl font-semibold text-blue-700">{pac?.category}</h2> 
+            <p className="text-green-600">${pac?.totalPrice}</p>
+          <p className="text-gray-700 text-md mt-2">{pac?.shortDescription}</p> 
 
-          {/* Price and Duration */}
           <div className="flex justify-between mt-4">
-            <p className="text-xl font-bold text-green-600">${pac?.pricePerNight} / night</p> {/* Green color for price */}
-            <p className="text-xl text-purple-600">{pac?.duration}</p> {/* Purple color for duration */}
+            {/* <p className="text-sm font-bold text-green-600">${pac?.pricePerNight} / night</p> */}
+            <p className="text-sm text-purple-600">Duration: {pac?.duration}</p> 
           </div>
 
-          {/* Inclusions and Activities */}
           <div className="mt-4">
-            <h3 className="text-xl font-semibold text-orange-600">Inclusions</h3> {/* Orange color for Inclusions */}
+            <h3 className="text-sm font-semibold text-orange-600">Inclusions</h3> 
             <p className="text-gray-600">{pac?.inclusions}</p>
 
-            <h3 className="text-xl font-semibold text-teal-600 mt-4">Activities</h3> {/* Teal color for Activities */}
+            <h3 className="text-sm font-semibold text-teal-600 mt-4">Activities</h3> 
             <p className="text-gray-600">{pac?.activities}</p>
           </div>
 
-          {/* Ideal For and Country */}
           <div className="flex justify-between mt-4">
             <p className="text-gray-600">Ideal for: <span className="font-semibold text-blue-500">{pac?.idealFor}</span></p> {/* Blue color for idealFor */}
-            <p className="text-gray-600">Country: <span className="font-semibold text-red-500">{pac?.country}</span></p> {/* Red color for country */}
           </div>
 
-          {/* Total Price */}
-          <div className="mt-4">
-            <h3 className="text-xl font-semibold text-yellow-500">Total Price</h3> {/* Yellow color for Total Price */}
-            <p className="text-gray-600">${pac?.totalPrice}</p>
-          </div>
+         
 
-          {/* Contact Email */}
-          <div className="mt-4">
-            <h3 className="text-xl font-semibold text-indigo-600">Contact</h3> {/* Indigo color for Contact */}
-            <p className="text-gray-600">{pac?.email}</p>
-          </div>
+          
         </div>
       </div>
     </div>
