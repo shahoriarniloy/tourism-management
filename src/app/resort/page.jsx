@@ -1,4 +1,4 @@
-import SingleResort from '@/components/resort/SingleResort';
+import SingleResort from '@/app/singleResort/[email]/page';
 import React from 'react';
 
 const page = () => {

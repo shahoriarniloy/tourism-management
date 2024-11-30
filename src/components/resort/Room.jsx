@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import TitleSection from "./TitleSection";
 import ReactSlider from "react-slider";
+import Link from "next/link";
 
 const Room = () => {
     const [resorts, setResorts] = useState([]);
@@ -77,7 +78,7 @@ const Room = () => {
     if (error) return <div className="text-center text-red-500">{error}</div>;
 
     return (
-        <section className="mx-24 px-4">
+        <section className="lg:mx-24 lg:px-4 px-2">
             <div className="flex flex-col items-center justify-center space-y-4 mt-6">
                 <form className="w-full max-w-6xl bg-white shadow-md rounded-lg p-4">
                     <div className="flex items-center mb-4">
@@ -126,15 +127,15 @@ const Room = () => {
                 </form>
             </div>
 
-            <div className="text-center mt-8 mb-8 px-4">
+            <div className="text-center mt-8 mb-8 lg:px-4">
                 <TitleSection mainHeader={"RESORT"} subHeader={"Explore the Best Resorts All Around the World!"} />
             </div>
 
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 lg:px-16 md:px-8 px-4">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 ">
                 {displayedResorts.map((resort) => (
                     <div
                         key={resort?._id}
-                        className="relative mt-4 h-[450px] overflow-hidden group mx-auto dark:bg-black bg-white dark:border-0 border rounded-md shadow-lg dark:text-white text-white flex flex-col"
+                        className="relative mt-4 h-96 overflow-hidden group mx-auto dark:bg-black bg-white dark:border-0 border rounded-md shadow-lg dark:text-white text-white flex flex-col"
                     >
                         <div className="w-full h-full relative">
                             <Image
@@ -154,9 +155,14 @@ const Room = () => {
                             <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-300 space-y-2 bg-sky-500 p-6 rounded-md">
                                 <h1 className="md:text-2xl font-semibold">{resort?.resortName}</h1>
                                 <p className="sm:text-base text-sm">{resort?.description}</p>
-                                <button className="p-2 flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-all">
-                                    See Details <ChevronsRight />
-                                </button>
+                                <Link
+href={`/singleResort?email=${resort.email}`}
+className="p-2 flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-all"
+>
+  See Details <ChevronsRight />
+</Link>
+
+
                             </div>
                         </article>
 

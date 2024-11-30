@@ -4,11 +4,11 @@ import Image from 'next/image';
 
 const PhotoGallery = () => {
     return (
-        <section className="pt-12">
-            <div className="text-center mb-8 px-4">
+        <section className="pt-12 lg:mx-24  lg:px-4 px-2">
+            <div className="text-center mb-8 ">
                 <TitleSection mainHeader={"EXCITING GALLERY"} subHeader={"Explore Unforgettable Experiences"} />
             </div>
-            <div className="container grid grid-cols-2 gap-4 mx-auto md:grid-cols-4 lg:px-16 md:px-8 px-4">
+            <div className="container grid grid-cols-2 gap-4 mx-auto md:grid-cols-4  ">
                 <Image width={600} height={600} src={"https://i.ibb.co.com/F5tTtdq/Sunset-Beach-Resort.jpg"} alt="" className="w-full h-full col-span-2 row-span-2 rounded shadow-sm min-h-96 md:col-start-3 md:row-start-1 dark:bg-gray-500 aspect-square" data-aos="fade-up" data-aos-duration="3000" />
 
                 <Image width={600} height={600} alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src={"https://i.ibb.co.com/MMKP16Z/Mountain-Retreat.jpg"} />

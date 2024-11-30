@@ -1,18 +1,61 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
 
 
-const getPackages = async () => { 
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packagesServices/api/get-all`)
-  const data = await res.json();
-  return data?.packages;
 
-}
+const SingleResortPackages = () => {
+    const router = useRouter();
+  const [packages, setPackages] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); 
+  const [email, setEmail] = useState(null);
 
-const Packages = async () => {
-  const packages = await getPackages() || [];
+  useEffect(() => {
+    if (router.query?.email) {
+      setEmail(router.query.email);
+    }
+  }, [router.query?.email]);
+  
+
+  useEffect(() => {
+    console.log(email);
+    if (email) {
+      const fetchResortData = async () => {
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/singleResort/api/${email}`
+          );
+          if (!response.ok) throw new Error("Failed to fetch resort data");
+          const data = await response.json();
+          console.log('resort',data);
+          setPackages(data ?? null);
+        } catch (error) {
+          setError(error.message);  
+          console.error("Error fetching resort data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchResortData();
+    }
+  }, [email]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;  // Show error message if there's an error
+  }
+
+  if (!resort) {
+    return <p>No resort information available.</p>;
+  }
+
 
 
   return (
@@ -52,8 +95,7 @@ const Packages = async () => {
             <p className="text-gray-600">
               <em>{p?.shortDescription}</em>
             </p>
-            {/* <p className="mt-2 text-red-600 font-thin">Regular Price${p?.pricePerNight} / night</p>
-            <p className="mt-2 text-green-600 font-thin">Package Price${p?.totalPrice} / night</p> */}
+           
           </div>
 
           <Link href={`/packagesServices/${p?._id}`} className="mt-auto">
@@ -72,4 +114,4 @@ const Packages = async () => {
   );
 };
 
-export default Packages;
+export default SingleResortPackages;
