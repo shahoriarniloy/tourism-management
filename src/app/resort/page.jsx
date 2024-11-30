@@ -1,14 +1,14 @@
+import React from 'react';
+import SingleResort from '../singleResort/page';
 
-"use client";
-import React, { Suspense } from "react";
-import SingleResort from "../singleResort/page";
-
-const ResortPage = () => {
+const page = () => {
     return (
-        <Suspense fallback={<p>Loading resort details...</p>}>
-            <SingleResort />
-        </Suspense>
+        <div>
+            <SingleResort/>
+            
+        </div>
     );
 };
 
-export default ResortPage;
+export default page;
+
