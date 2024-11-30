@@ -1,5 +1,5 @@
-import SingleResort from '@/app/singleResort/[email]/page';
 import React from 'react';
+import SingleResort from '../singleResort/page';
 
 const page = () => {
     return (
