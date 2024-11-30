@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const PackagePage = ({ params }) => {
+const RoomDetails = ({ params }) => {
   const [pac, setPac] = useState({});
   const [id, setId] = useState(null); 
   const [loading, setLoading] = useState(true);
@@ -21,14 +21,17 @@ const PackagePage = ({ params }) => {
   useEffect(() => {
     if (id) {
       setLoading(true); 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/packagesServices/api/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/singleResort/roomDetails/api/${id}`)
         .then((res) => res.json())
         .then((data) => {
-          setPac(data?.packages);
+          setPac(data.room);
+          
           setLoading(false); 
         });
     }
   }, [id]);
+  console.log(pac);
+
 
   if (loading) {
     return (
@@ -68,28 +71,19 @@ const PackagePage = ({ params }) => {
         </div>
 
         <div className="lg:w-1/2 md:w-1/2 w-full py-2 px-6">
-          <h2 className="text-3xl font-semibold text-blue-700">{pac?.category}</h2> 
-            <p className="text-green-600">${pac?.totalPrice}</p>
-          <p className="text-gray-700 text-md mt-2">{pac?.shortDescription}</p> 
+        <h2 className="text-3xl font-semibold text-blue-700">{pac?.roomName}</h2> 
 
-          <div className="flex justify-between mt-4">
-            {/* <p className="text-sm font-bold text-green-600">${pac?.pricePerNight} / night</p> */}
-            <p className="text-sm text-purple-600">Duration: {pac?.duration}</p> 
-          </div>
+          
+            <em><p className="text-green-600">${pac?.pricePerNight} Per Night</p></em>
+            <em>          <p className="text-gray-700 text-md mt-2">{pac?.description}</p> 
 
-          <div className="mt-4">
-            <h3 className="text-sm font-semibold text-orange-600">Inclusions</h3> 
-            <p className="text-gray-600">{pac?.inclusions}</p>
+</em>
+          <p className="text-gray-700 text-md mt-2">{pac?.roomType} Room, {pac?.capacity} Person</p> 
+          <h2 className="text-md font-thin text-gray-700">Room No:{pac?.roomNo}</h2> 
 
-            <h3 className="text-sm font-semibold text-teal-600 mt-4">Activities</h3> 
-            <p className="text-gray-600">{pac?.activities}</p>
-          </div>
+<button className='text-white bg-green-500 rounded-md px-6 py-2 mt-4'>Book Now</button>
 
-          <div className="flex justify-between mt-4">
-            <p className="text-gray-600">Ideal for: <span className="font-semibold text-blue-500">{pac?.idealFor}</span></p> 
-          </div>
-
-          <button className='text-white bg-green-500 px-6 py-2 mt-4 rounded-md'>Book Now</button>
+         
 
          
 
@@ -100,4 +94,4 @@ const PackagePage = ({ params }) => {
   );
 };
 
-export default PackagePage;
+export default RoomDetails;

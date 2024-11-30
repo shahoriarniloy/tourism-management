@@ -89,9 +89,11 @@ function TopResorts() {
           ))}
         </div>
         <div className="flex justify-center items-center mt-6">
-        <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 border-2 border-sky-500 px-12 font-medium text-white shadow-md hover:shadow-lg transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]">
+        <Link href={`/resorts`}>
+     <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 border-2 border-sky-500 px-12 font-medium text-white shadow-md hover:shadow-lg transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]">
           See More
         </button>
+     </Link>
       </div>
       </section>
     );
