@@ -6,15 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const SingleResort = () => {
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email');
-  console.log(email);
-
-  const [resort, setResort] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [packages, setPackages] = useState(null);
-  const [rooms, setRooms] = useState(null);
+  const [email, setEmail] = useState(null); useEffect(() => { const searchParams = new URLSearchParams(window.location.search); setEmail(searchParams.get('email')); }, []); const [resort, setResort] = useState(null); const [loading, setLoading] = useState(true); const [error, setError] = useState(null); const [packages, setPackages] = useState(null); const [rooms, setRooms] = useState(null);
 
   useEffect(() => {
     const fetchResortData = async () => {
