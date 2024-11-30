@@ -143,7 +143,7 @@ const SingleResort =async () => {
                   />
                 </div>
                 <h3 className="text-lg font-semibold mt-2">{room.type}</h3>
-                <p className="text-gray-600">{room.description}</p>
+                <p className="text-gray-600"><em>{room.description}</em></p>
                 <p className="text-gray-800 font-bold mt-2">
                   ${room.price} / night
                 </p>
@@ -153,7 +153,7 @@ const SingleResort =async () => {
             <p className="text-gray-600">No rooms available at the moment.</p>
           )}
         </div>
-        <h2 className="text-xl font-bold mt-5 mb-2 text-green-600">Available Packages</h2>
+        <h2 className="text-xl font-bold mt-5 mb-2 text-black">Available Packages</h2>
 
 
 

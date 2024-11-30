@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const Page = ({ params }) => {
+const PackagePage = ({ params }) => {
   const [pac, setPac] = useState({});
   const [id, setId] = useState(null); 
   const [loading, setLoading] = useState(true);
@@ -39,29 +41,32 @@ const Page = ({ params }) => {
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        {/* Main Image */}
-        <div className="relative w-full h-64">
-          <Image
-            src={pac?.photoURL1}
-            alt="Package Image"
-            className="w-full h-full object-cover"
-            width={864}
-            height={256}
-          />
-        </div>
-
-        {/* Additional Images (Gallery) */}
-        <div className="flex space-x-4 p-6">
-          {pac?.photoURL2 && (
-            <Image
-              src={pac?.photoURL2}
-              alt="Additional Image"
-              className="w-1/2 h-48 object-cover rounded-lg shadow-md"
-              width={408}
-              height={192}
-            />
+        {/* Image Carousel */}
+        <Carousel showThumbs={false} infiniteLoop useKeyboardArrows autoPlay>
+          {pac?.photoURL1 && (
+            <div>
+              <Image
+                src={pac?.photoURL1}
+                alt="Package Image 1"
+                className="w-full h-full object-cover"
+                width={864}
+                height={256}
+              />
+            </div>
           )}
-        </div>
+          {pac?.photoURL2 && (
+            <div>
+              <Image
+                src={pac?.photoURL2}
+                alt="Package Image 2"
+                className="w-full h-full object-cover"
+                width={864}
+                height={256}
+              />
+            </div>
+          )}
+          {/* Add more images as needed */}
+        </Carousel>
 
         {/* Package Details */}
         <div className="p-6">
@@ -106,4 +111,4 @@ const Page = ({ params }) => {
   );
 };
 
-export default Page;
+export default PackagePage;
