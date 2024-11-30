@@ -1,7 +1,7 @@
 
 "use client";
 import React, { Suspense } from "react";
-import SingleResort from "./SingleResort";
+import SingleResort from "../singleResort/page";
 
 const ResortPage = () => {
     return (
