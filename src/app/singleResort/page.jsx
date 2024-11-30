@@ -5,8 +5,6 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-
-
 const SingleResort = () => {
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
@@ -16,11 +14,7 @@ const SingleResort = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [packages, setPackages] = useState(null);
-  const [rooms, setRooms] = useState(null); 
-
-
-
-
+  const [rooms, setRooms] = useState(null);
 
   useEffect(() => {
     const fetchResortData = async () => {
@@ -46,22 +40,21 @@ const SingleResort = () => {
     }
   }, [email]);
 
-
   useEffect(() => {
-    console.log(email);
     if (email) {
       const fetchPackageData = async () => {
+        setLoading(true);
         try {
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/singleResort/api/${email}`
           );
-          if (!response.ok) throw new Error("Failed to fetch Package data");
+          if (!response.ok) throw new Error("Failed to fetch package data");
           const data = await response.json();
-          console.log('packages',data.packages);
+          console.log('packages', data.packages);
           setPackages(data.packages ?? null);
         } catch (error) {
-          setError(error.message);  
-          console.error("Error fetching Package data:", error);
+          setError(error.message);
+          console.error("Error fetching package data:", error);
         } finally {
           setLoading(false);
         }
@@ -71,10 +64,10 @@ const SingleResort = () => {
     }
   }, [email]);
 
-
   useEffect(() => {
     if (email) {
       const fetchRoomData = async () => {
+        setLoading(true);
         try {
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/singleResort/rooms/api/${email}`
@@ -95,7 +88,6 @@ const SingleResort = () => {
     }
   }, [email]);
 
-
   if (loading) {
     return <p className="text-center">Loading...</p>;
   }
@@ -108,7 +100,6 @@ const SingleResort = () => {
     return <p className="text-center">No resort information available.</p>;
   }
 
-  
   const {
     resortName,
     location,
@@ -123,11 +114,10 @@ const SingleResort = () => {
   const resortImageUrl = imageUrl || "https://i.ibb.co.com/PzzJnjz/48812962.jpg";
   console.log(resortImageUrl);
   const resortBannerImage = bannerImage || "https://i.ibb.co.com/HB0tX6t/building-decorated-indian-republic-day-1.jpg";
-  const nights = parseInt(packages?.duration?.split(" ")[2]) || 0; 
+  const nights = parseInt(packages?.duration?.split(" ")[2]) || 0;
   const priceBreakdown = packages?.pricePerNight * nights;
 
   return (
-    
     <div className="resort-details lg:mx-24 px-4">
       <div className="banner relative w-full h-60 md:h-80 lg:h-96">
         <Image
@@ -167,8 +157,7 @@ const SingleResort = () => {
         </div>
       </div>
 
-
-     <h2 className="text-2xl mb-8  mt-8 font-extrabold leading-tight text-black">Available Rooms</h2>
+      <h2 className="text-2xl mb-8 mt-8 font-extrabold leading-tight text-black">Available Rooms</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {rooms &&
           rooms.map((room) => (
@@ -194,77 +183,45 @@ const SingleResort = () => {
                 </h2>
                 <em><p className="text-gray-600 mt-2">{room?.description}</p></em>
                 <div className="flex gap-6 text-gray-600 text-md font-thin">
-                   <p>Room:{room?.roomType}</p>
-                <p>Capacity:{room?.capacity}</p>
+                  <p>Room:{room?.roomType}</p>
+                  <p>Capacity:{room?.capacity}</p>
                 </div>
-               
               </div>
             </div>
           ))}
       </div>
 
-
-<h1 className="text-2xl mb-8  mt-8 font-extrabold leading-tight text-black">Available Packages</h1>
-
+      <h1 className="text-2xl mb-8 mt-8 font-extrabold leading-tight text-black">Available Packages</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-  {packages && packages?.map(packageItem => (
-    <div
-      key={packageItem._id}
-      className="room-card bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
-    >
-      <div className="relative w-full h-56">
-        <Image
-          src={packageItem?.photoURL1}
-          alt={packageItem?.category}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-t-lg"
-        />
-        <div className="absolute top-2 right-2 bg-gray-900 bg-opacity-75 text-white text-sm font-semibold rounded px-3 py-2">
-          ${packageItem?.totalPrice}
-          <br />
-          <span className="text-xs font-thin">
-            <del>${packageItem?.pricePerNight * (parseInt(packageItem?.duration?.split(" ")[2]) || 0)}</del>
-          </span>
-        </div>
+        {packages && packages?.map(packageItem => (
+          <div
+            key={packageItem._id}
+            className="room-card bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+          >
+            <div className="relative w-full h-56">
+              <Image
+                src={packageItem?.photoURL1}
+                alt={packageItem?.category}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-t-lg"
+              />
+              <div className="absolute top-2 right-2 bg-gray-900 bg-opacity-75 text-white text-sm font-semibold rounded px-3 py-2">
+                ${packageItem?.totalPrice}
+                <br />
+                <span className="text-xs font-thin">
+                  <del>${packageItem?.pricePerNight * (parseInt(packageItem?.duration?.split(" ")[2]) || 0)}</del>
+                </span>
+              </div>
+            </div>
+            <div className="p-4">
+              <h2 className="text-lg font-semibold text-sky-500">{packageItem?.category}</h2>
+              <h3 className="text-md font-thin text-gray-500 mt-2">Ideal For: {packageItem?.idealFor}</h3>
+              <p className="text-gray-600 mt-2">{packageItem?.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="p-4">
-        <h2 className="text-lg font-semibold text-sky-500">{packageItem?.category}</h2>
-        <h3 className="text-md font-thin text-gray-500 mt-2">Ideal For: {packageItem?.idealFor}</h3>
-        <p className="text-gray-600 mt-2 h-24">
-  <em>
-    {packageItem?.shortDescription
-      ?.split(" ")
-      .slice(0, 15)
-      .join(" ")}
-    {packageItem?.shortDescription?.split(" ").length > 10 && (
-      <span>
-        ...{" "}
-        <Link
-          href={`/packagesServices/${packageItem._id}`}
-          className="text-sky-500 font-semibold hover:underline"
-        >
-          See More
-        </Link>
-      </span>
-    )}
-  </em>
-</p>
-
-
-        <Link href={`/packagesServices/${packageItem._id}`}>
-          <button className="btn bg-green-500 text-white w-full mt-4 py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-300">
-            Explore This Package
-          </button>
-        </Link>
-      </div>
-    </div>
-  ))}
-</div>
-
-      
-
-      
     </div>
   );
 };
