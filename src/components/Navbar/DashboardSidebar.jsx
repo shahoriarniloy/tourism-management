@@ -66,44 +66,43 @@ const DashboardSidebar = () => {
         </div>
 
         <nav className="flex-1 p-4 space-y-4 h-screen ">
-  <Link href="/dashboard/addDestinations">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaMapPin className="mr-2 text-md" /> <span className="text-md">Create New Destination</span>
-    </span>
-  </Link>
-  <Link href="/dashboard/my-added-spot">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaRegListAlt className="mr-2 text-md" /> <span className="text-md">Manage Destinations</span>
-    </span>
-  </Link>
-  <Link href="/dashboard/addPackages">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaBoxOpen className="mr-2 text-md" /> <span className="text-md">Create Travel Package</span>
-    </span>
-  </Link>
-  <Link href="/dashboard/my-added-packages">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaClipboardList className="mr-2 text-md" /> <span className="text-md">Manage Travel Packages</span>
-    </span>
-  </Link>
-  <Link href="/dashboard/addResortRoom">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaBed className="mr-2 text-md" /> <span className="text-md">Add Resort Room</span>
-    </span>
-  </Link>
-  <Link href="/dashboard/myResortRoom">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaListUl className="mr-2 text-md" /> <span className="text-md">Manage Resort Rooms</span>
-    </span>
-  </Link>
-  
-  <Link href="/dashboard/myResort">
-    <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
-      <FaTools className="mr-2 text-md" /> <span className="text-md">Account Settings</span>
-    </span>
-  </Link>
-</nav>
 
+          <Link href="/dashboard/addDestinations">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaMapMarkerAlt className="mr-2 text-xl" /> Add Destination
+            </span>
+          </Link>
+          <Link href="/dashboard/my-added-spot">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaList className="mr-2 text-xl" /> Destination List
+            </span>
+          </Link>
+          <Link href="/dashboard/addPackages">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaMapMarkerAlt className="mr-2 text-xl" /> Add Package
+            </span>
+          </Link>
+          <Link href="/dashboard/my-added-packages">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaList className="mr-2 text-xl" /> Packages List
+            </span>
+          </Link>
+          <Link href="/dashboard/addResortRoom">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaMapMarkerAlt className="mr-2 text-xl" /> Add Resort Room
+            </span>
+          </Link>
+          <Link href="/dashboard/myResortRoom">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaList className="mr-2 text-xl" /> Resort Room List
+            </span>
+          </Link>
+          <Link href="/dashboard/myResort">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaCog className="mr-2 text-xl" /> Settings
+            </span>
+          </Link>
+        </nav>
       </aside>
     </div>
   );

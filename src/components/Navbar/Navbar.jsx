@@ -50,11 +50,11 @@ const Navbar = () => {
               <span className="text-xs">T</span>
               <span className="text-sm">r</span>
               <span className="text-base">a</span>
-              <span className="text-lg">i</span>
+              <span className="text-sm">i</span>
               <span className="text-xl">l</span>
               <span className="text-2xl text-sky-500">B</span>
               <span className="text-xl text-sky-500">l</span>
-              <span className="text-lg text-sky-500">i</span>
+              <span className="text-sm text-sky-500">i</span>
               <span className="text-base text-sky-500">s</span>
               <span className="text-sm text-sky-500">s</span>
             </span>
@@ -62,29 +62,29 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`hidden lg:flex items-center space-x-8 ${scrolled ? "text-gray-800" : "text-white"}`}
+          className={`hidden  lg:flex items-center space-x-8 ${scrolled ? "text-gray-800" : "text-white"}`}
         >
           <Link
             href="/"
-            className={`text-lg hover:text-sky-500 transition duration-300 ${pathName === "/" ? "font-bold" : ""}`}
+            className={`text-sm hover:text-sky-500 transition duration-300 ${pathName === "/" ? "font-bold" : ""}`}
           >
             Home
           </Link>
           <Link
             href="/destinations"
-            className={`text-lg hover:text-sky-500 transition duration-300 ${pathName === "/destinations" ? "font-bold" : ""}`}
+            className={`text-sm hover:text-sky-500 transition duration-300 ${pathName === "/destinations" ? "font-bold" : ""}`}
           >
             Destinations
           </Link>
           <Link
             href="/resorts"
-            className={`text-lg hover:text-sky-500 transition duration-300 ${pathName === "/resorts" ? "font-bold" : ""}`}
+            className={`text-sm hover:text-sky-500 transition duration-300 ${pathName === "/resorts" ? "font-bold" : ""}`}
           >
             Resorts
           </Link>
           <Link
             href="/about"
-            className={`text-lg hover:text-sky-500 transition duration-300 ${pathName === "/about" ? "font-bold" : ""}`}
+            className={`text-sm hover:text-sky-500 transition duration-300 ${pathName === "/about" ? "font-bold" : ""}`}
           >
             About
           </Link>
@@ -141,12 +141,12 @@ const Navbar = () => {
           {menuOpen ? (
             <FaTimes className={`${scrolled ? "text-gray-800" : "text-white"}`} />
           ) : (
-            <FaBars />
+            <FaBars className="text-sky-500"/>
           )}
         </button>
 
         <div
-          className={`lg:hidden absolute top-16 right-0 w-3/4 bg-white p-6 rounded-l-md shadow-md transition-transform transform ${
+          className={`lg:hidden absolute  top-16 right-0 w-3/4 bg-white p-6 rounded-l-md shadow-md transition-transform transform ${
             menuOpen ? "translate-x-0" : "translate-x-full"
           } duration-500`}
         >
