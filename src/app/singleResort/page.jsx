@@ -209,8 +209,31 @@ const SingleResort = () => {
             <div className="p-4">
               <h2 className="text-lg font-semibold text-sky-500">{packageItem?.category}</h2>
               <h3 className="text-md font-thin text-gray-500 mt-2">Ideal For: {packageItem?.idealFor}</h3>
-              <p className="text-gray-600 mt-2">{packageItem?.description}</p>
-            </div>
+              <p className="text-gray-600 mt-2 h-24">
+  <em>
+    {packageItem?.shortDescription
+      ?.split(" ")
+      .slice(0, 15)
+      .join(" ")}
+    {packageItem?.shortDescription?.split(" ").length > 10 && (
+      <span>
+        ...{" "}
+        <Link
+          href={`/packagesServices/${packageItem._id}`}
+          className="text-sky-500 font-semibold hover:underline"
+        >
+          See More
+        </Link>
+      </span>
+    )}
+  </em>
+</p>
+        <Link href={`/packagesServices/${packageItem._id}`}>
+          <button className="btn bg-green-500 text-white w-full mt-4 py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-300">
+            Explore This Package
+          </button>
+        </Link>            </div>
+            
           </div>
         ))}
       </div>
