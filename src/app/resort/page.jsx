@@ -1,5 +1,5 @@
-import SingleResort from '@/components/resort/SingleResort';
 import React from 'react';
+import SingleResort from '../singleResort/page';
 
 const page = () => {
     return (

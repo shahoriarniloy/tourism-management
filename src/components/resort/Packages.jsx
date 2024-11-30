@@ -1,7 +1,15 @@
-import { getPackages } from '@/services/getPackages';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
+
+const getPackages = async () => { 
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packagesServices/api/get-all`)
+  const data = await res.json();
+  return data?.packages;
+
+}
 
 const Packages = async () => {
   const packages = await getPackages() || [];

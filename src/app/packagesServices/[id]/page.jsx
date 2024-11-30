@@ -41,8 +41,8 @@ const PackagePage = ({ params }) => {
   return (
     <div className="mx-auto mb-4">
       <div className="bg-sky-700 h-16 mb-6"></div>
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden flex mx-24 px-4 py-8">
-        <div className="w-1/2 p-4">
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden flex lg:flex-row md:flex-row flex-col lg:mx-24 px-4 py-8">
+        <div className="lg:w-1/2 md:w-1/2 w-full p-4">
           <Carousel showThumbs={false} infiniteLoop useKeyboardArrows autoPlay>
             {pac?.photoURL1 && (
               <div className="h-64 w-full">
@@ -67,7 +67,7 @@ const PackagePage = ({ params }) => {
           </Carousel>
         </div>
 
-        <div className="w-1/2 py-2 px-6">
+        <div className="lg:w-1/2 md:w-1/2 w-full py-2 px-6">
           <h2 className="text-3xl font-semibold text-blue-700">{pac?.category}</h2> 
             <p className="text-green-600">${pac?.totalPrice}</p>
           <p className="text-gray-700 text-md mt-2">{pac?.shortDescription}</p> 

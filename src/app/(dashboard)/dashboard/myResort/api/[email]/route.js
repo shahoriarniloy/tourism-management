@@ -1,15 +1,11 @@
-
 import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
 
-
-
-
-export const GET = async (request, { params }) => {
-  console.log('called');
+export const GET = async (request, context) => {
+  const { params } = context; 
   const db = await connectDB();
   const resortsCollection = db.collection('resorts');
-  
+
   try {
     const myResort = await resortsCollection.findOne({ email: params.email });
     if (!myResort) {
@@ -22,13 +18,12 @@ export const GET = async (request, { params }) => {
   }
 };
 
-
-
-export const PATCH = async (request, { params }) => {
+export const PATCH = async (request, context) => {
   try {
+    const { params } = context; 
     const db = await connectDB();
-    const resortsCollection = await db.collection('resorts');
-    
+    const resortsCollection = db.collection('resorts');
+
     const updateDoc = await request.json();
     const { email } = params;
 
@@ -41,9 +36,9 @@ export const PATCH = async (request, { params }) => {
     }
 
     const resp = await resortsCollection.updateOne(
-      { email }, 
-      { $set: filteredUpdateDoc }, 
-      { upsert: true } 
+      { email },
+      { $set: filteredUpdateDoc },
+      { upsert: true }
     );
 
     return NextResponse.json({ message: 'Spot updated successfully', response: resp });
