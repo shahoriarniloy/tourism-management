@@ -2,7 +2,7 @@ import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
-    const searchQuery = req.nextUrl.searchParams.get('searchQuery'); // Correct way to access query params
+    const searchQuery = req.nextUrl.searchParams.get('searchQuery'); 
     console.log('search', searchQuery);
     const db = await connectDB();
 
@@ -10,7 +10,6 @@ export const GET = async (req) => {
     const resortsCollection = await db.collection('resorts');
 
     try {
-        // Log before each operation
         console.log("Searching for destinations...");
         const destinationResults = await destinationsCollection.find({
             $or: [
