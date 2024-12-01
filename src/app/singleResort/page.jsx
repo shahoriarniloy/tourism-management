@@ -110,7 +110,7 @@ const SingleResort = () => {
   const priceBreakdown = packages?.pricePerNight * nights;
 
   return (
-    <div className="resort-details lg:mx-24 px-4">
+    <div className="resort-details ">
       <div className="banner relative w-full h-60 md:h-80 lg:h-96">
         <Image
           src={resortBannerImage}
@@ -148,7 +148,7 @@ const SingleResort = () => {
           </p>
         </div>
       </div>
-
+      <div className="lg:mx-24 px-4 mb-8">
       <h2 className="text-2xl mb-8 mt-8 font-extrabold leading-tight text-black">Available Rooms</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {rooms &&
@@ -178,6 +178,11 @@ const SingleResort = () => {
                   <p>Room:{room?.roomType}</p>
                   <p>Capacity:{room?.capacity}</p>
                 </div>
+                <Link href={`/singleResort/roomDetails/${room._id}`}>
+          <button className="btn bg-green-500 text-white w-full mt-4 py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-300">
+            View Details
+          </button>
+        </Link> 
               </div>
             </div>
           ))}
@@ -237,6 +242,10 @@ const SingleResort = () => {
           </div>
         ))}
       </div>
+
+      </div>
+
+      
     </div>
   );
 };
