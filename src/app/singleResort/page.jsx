@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 
 const SingleResort = () => {
   const [email, setEmail] = useState(null); useEffect(() => { const searchParams = new URLSearchParams(window.location.search); setEmail(searchParams.get('email')); }, []); const [resort, setResort] = useState(null); const [loading, setLoading] = useState(true); const [error, setError] = useState(null); const [packages, setPackages] = useState(null); const [rooms, setRooms] = useState(null);
@@ -81,7 +82,11 @@ const SingleResort = () => {
   }, [email]);
 
   if (loading) {
-    return <p className="text-center">Loading...</p>;
+    return (
+      <div className="h-screen w-full flex justify-center">
+        <Logo />
+      </div>
+    );
   }
 
   if (error) {
