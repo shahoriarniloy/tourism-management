@@ -24,6 +24,7 @@ export default function Payment() {
     setRoomId(params.get('roomId'));
   }, []);
 
+  console.log(roomId);
   useEffect(() => {
     if (checkInDate && checkOutDate) {
       const checkIn = new Date(checkInDate);
@@ -42,7 +43,7 @@ export default function Payment() {
     const response = await fetch('/payment/api', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: totalPrice, email: session?.user?.email }),
+      body: JSON.stringify({ amount: totalPrice, email: session?.user?.email,roomId:roomId }),
     });
 
     const data = await response.json();
@@ -63,6 +64,10 @@ export default function Payment() {
     setLoading(false);
   };
 
+
+
+
+  
   return (
     <div className="mx-auto mb-4 flex justify-center">
   <div className="p-6 mt-24 rounded-md shadow-lg bg-white max-w-md w-full">

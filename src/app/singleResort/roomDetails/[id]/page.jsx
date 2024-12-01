@@ -39,14 +39,12 @@ const RoomDetails = ({ params }) => {
   }
 
   const handleBookNow = () => {
-    // Construct the query string manually
     const query = new URLSearchParams({
       roomName: pac?.roomName,
       pricePerNight: pac?.pricePerNight,
-      roomId: pac?.id,
+      roomId: pac?._id,
     }).toString();
 
-    // Navigate to the payment page with room details in the query string
     window.location.href = `/payment?${query}`;
   };
 
