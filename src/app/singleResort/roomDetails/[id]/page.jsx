@@ -25,13 +25,10 @@ const RoomDetails = ({ params }) => {
         .then((res) => res.json())
         .then((data) => {
           setPac(data.room);
-          
           setLoading(false); 
         });
     }
   }, [id]);
-  console.log(pac);
-
 
   if (loading) {
     return (
@@ -40,6 +37,18 @@ const RoomDetails = ({ params }) => {
       </div>
     );
   }
+
+  const handleBookNow = () => {
+    // Construct the query string manually
+    const query = new URLSearchParams({
+      roomName: pac?.roomName,
+      pricePerNight: pac?.pricePerNight,
+      roomId: pac?.id,
+    }).toString();
+
+    // Navigate to the payment page with room details in the query string
+    window.location.href = `/payment?${query}`;
+  };
 
   return (
     <div className="mx-auto mb-4">
@@ -71,23 +80,17 @@ const RoomDetails = ({ params }) => {
         </div>
 
         <div className="lg:w-1/2 md:w-1/2 w-full py-2 px-6">
-        <h2 className="text-3xl font-semibold text-blue-700">{pac?.roomName}</h2> 
-
-          
-            <em><p className="text-green-600">${pac?.pricePerNight} Per Night</p></em>
-            <em>          <p className="text-gray-700 text-md mt-2">{pac?.description}</p> 
-
-</em>
-          <p className="text-gray-700 text-md mt-2">{pac?.roomType} Room, {pac?.capacity} Person</p> 
-          <h2 className="text-md font-thin text-gray-700">Room No:{pac?.roomNo}</h2> 
-
-<button className='text-white bg-green-500 rounded-md px-6 py-2 mt-4'>Book Now</button>
-
-         
-
-         
-
-          
+          <h2 className="text-3xl font-semibold text-blue-700">{pac?.roomName}</h2>
+          <em><p className="text-green-600">${pac?.pricePerNight} Per Night</p></em>
+          <p className="text-gray-700 text-md mt-2">{pac?.description}</p>
+          <p className="text-gray-700 text-md mt-2">{pac?.roomType} Room, {pac?.capacity} Person</p>
+          <h2 className="text-md font-thin text-gray-700">Room No: {pac?.roomNo}</h2>
+          <button
+            onClick={handleBookNow}
+            className="text-white bg-green-500 rounded-md px-6 py-2 mt-4"
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>
