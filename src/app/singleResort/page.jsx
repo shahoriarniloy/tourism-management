@@ -18,7 +18,7 @@ const SingleResort = () => {
         );
         if (!response.ok) throw new Error("Failed to fetch resort data");
         const data = await response.json();
-        console.log(data.myResort);
+        
         setResort(data.myResort ?? null);
       } catch (error) {
         setError(error.message);
@@ -43,7 +43,7 @@ const SingleResort = () => {
           );
           if (!response.ok) throw new Error("Failed to fetch package data");
           const data = await response.json();
-          console.log('packages', data.packages);
+          // console.log('packages', data.packages);
           setPackages(data.packages ?? null);
         } catch (error) {
           setError(error.message);
@@ -67,7 +67,7 @@ const SingleResort = () => {
           );
           if (!response.ok) throw new Error("Failed to fetch room data");
           const data = await response.json();
-          console.log("rooms", data.rooms);
+          // console.log("rooms", data.rooms);
           setRooms(data.rooms ?? null);
         } catch (error) {
           setError(error.message);
@@ -165,7 +165,7 @@ const SingleResort = () => {
               <div className="relative w-full h-56">
                 <Image
                   src={room?.photoURL1}
-                  alt={room?.category}
+                  alt={room?.roomName}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-t-lg"
@@ -212,7 +212,11 @@ const SingleResort = () => {
                 ${packageItem?.totalPrice}
                 <br />
                 <span className="text-xs font-thin">
-                  <del>${packageItem?.pricePerNight * (parseInt(packageItem?.duration?.split(" ")[2]) || 0)}</del>
+                <del>
+  ${packageItem?.pricePerNight * 
+    (parseInt(packageItem?.duration?.toLowerCase().split("days,")[1]?.split("nights"[0])))
+  }
+</del>
                 </span>
               </div>
             </div>
