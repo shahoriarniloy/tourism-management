@@ -1,31 +1,45 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronsRight } from "lucide-react";
 import Link from "next/link";
+import Logo from "./Logo";
 
 function TopDestinations() {
-  const destinations = [
-    {
-      image:
-        "https://i.ibb.co/fQvj78y/braden-jarvis-pr-Sog-Oo-Fmkw-unsplash.jpg",
-      title: "Hawaii",
-      description:
-        "Visiting Hawaii offers a unique blend of stunning beaches, lush landscapes, and rich cultural experiences.",
-    },
-    {
-      image:
-        "https://i.ibb.co/LYkf0pr/gondola-ride-in-autumn-in-kashmir-2023-10-18t174214-790-min.png",
-      title: "Maldives",
-      description:
-        "The Maldives is a tropical paradise known for crystal-clear waters, overwater bungalows, and serene beauty.",
-    },
-    {
-      image: "https://i.ibb.co/j85Gjdm/Paris1.jpg",
-      title: "Paris",
-      description:
-        "Paris enchants visitors with its iconic landmarks, rich history, art, and exquisite cuisine.",
-    },
-  ];
+
+  const [destinations, setDestinations] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const resp = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/destinations/api`
+            );
+            if (!resp.ok) {
+                throw new Error("Failed to fetch resorts");
+            }
+            const data = await resp.json();
+           
+            setDestinations(data?.destinations|| []);
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+}, []);
+
+if (loading) return <div className="h-screen w-full flex justify-center"><Logo/></div>
+;
+if (error) return <p>Error: {error}</p>;
+
+const topDestinations = destinations.slice(0, 6);
+  
 
   return (
     <section className="pt-16 ">
@@ -40,15 +54,15 @@ function TopDestinations() {
       </div>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 lg:px-16 md:px-8 px-4">
-        {destinations.map((destination, index) => (
+        {topDestinations.map((destination, index) => (
           <div
             key={index}
             className="relative h-[400px] group mx-auto dark:bg-black bg-white dark:border-0 border overflow-hidden rounded-md dark:text-white text-black w-full sm:w-[400px] shadow-lg hover:shadow-2xl transition-shadow duration-300"
           >
             <figure className="w-full h-full rounded-md overflow-hidden">
               <Image
-                src={destination.image}
-                alt={destination.title}
+                src={destination.photoURL2}
+                alt={destination.name}
                 width={600}
                 height={600}
                 className="h-full w-full scale-105 group-hover:scale-100 rounded-lg object-cover transition-all duration-300"
@@ -57,7 +71,7 @@ function TopDestinations() {
             <div className="absolute top-0 left-0 w-full h-full transition-all duration-300 bg-gradient-to-b from-[#2b2f3325] via-[#2832365b] to-[#0a52be] opacity-45"></div>
             <article className="p-4 space-y-2 absolute -bottom-10 group-hover:bottom-0 transition-all duration-300">
               <h1 className="text-xl lg:text-2xl font-semibold capitalize">
-                {destination.title}
+                {destination.name}
               </h1>
               <p className="text-sm lg:text-base text-white">
                 {destination.description}

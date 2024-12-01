@@ -1,23 +1,106 @@
-import React from 'react';
-import DesteinationCard from './DesteinationCard';
+"use client"
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { ChevronsRight } from "lucide-react";
+import Link from "next/link";
+import Logo from "../Logo";
 
-const DestinationBody = () => {
-    return (
-        <div className='text-center mt-28 w-11/12 mx-auto'>
-            <p className='font-sans'>Get Ready To </p>
-            <h2 className='text-5xl font-bold py-3'>Explore Top Destination</h2>
-            <p className='text-gray-400 text-lg w-11/12 mx-auto mb-3'>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
-            {/* here card will be shown dynamically */}
-            <div className='grid grid-cols-4 gap-2 justify-between'>
-                <DesteinationCard></DesteinationCard>
-                <DesteinationCard></DesteinationCard>
-                <DesteinationCard></DesteinationCard>
-                <DesteinationCard></DesteinationCard>
-                <DesteinationCard></DesteinationCard>
-                <DesteinationCard></DesteinationCard>
-            </div>
-        </div>
-    );
-};
+function Destinations() {
 
-export default DestinationBody;
+  const [destinations, setDestinations] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const resp = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/destinations/api`
+            );
+            if (!resp.ok) {
+                throw new Error("Failed to fetch resorts");
+            }
+            const data = await resp.json();
+           
+            setDestinations(data?.destinations|| []);
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+}, []);
+
+if (loading) return <div className="h-screen w-full flex justify-center"><Logo/></div>;
+if (error) return <p>Error: {error}</p>;
+
+  
+
+  return (
+    <section className="pt-16 ">
+      <div className="text-center mb-12 px-4">
+        <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight text-black ">
+           Explore Destinations
+        </h1>
+        <p className="mt-4 text-lg text-black font-thin">
+          Discover breathtaking locations, experience unique cultures, and
+          immerse yourself in unforgettable adventures.
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 lg:px-16 md:px-8 px-4">
+        {destinations.map((destination, index) => (
+          <div
+            key={index}
+            className="relative h-[400px] group mx-auto dark:bg-black bg-white dark:border-0 border overflow-hidden rounded-md dark:text-white text-black w-full sm:w-[400px] shadow-lg hover:shadow-2xl transition-shadow duration-300"
+          >
+            <figure className="w-full h-full rounded-md overflow-hidden">
+              <Image
+                src={destination.photoURL1}
+                alt={destination.name}
+                width={600}
+                height={600}
+                className="h-full w-full scale-105 group-hover:scale-100 rounded-lg object-cover transition-all duration-300"
+              />
+            </figure>
+            <div className="absolute top-0 left-0 w-full h-full transition-all duration-300 bg-gradient-to-b from-[#2b2f3325] via-[#2832365b] to-[#0a52be] opacity-45"></div>
+            <article className="p-4 space-y-2 absolute -bottom-10 group-hover:bottom-0 transition-all duration-300">
+              <h1 className="text-xl lg:text-2xl font-semibold capitalize">
+                {destination.name}
+              </h1>
+              <p className="text-sm lg:text-base text-white">
+                {destination.description}
+              </p>
+              <a
+                href="#"
+                className="text-sm lg:text-base text-white  font-normal group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1 transition-all duration-300"
+              >
+                Explore
+                <span>
+                  <ChevronsRight />
+                </span>
+              </a>
+            </article>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col items-center mt-6">
+        <p className="text-sm mb-2 text-black font-thin">
+          Ready to start your next adventure? See more of the world’s hidden
+          gems and iconic landmarks.
+        </p>
+     {/* <Link href={`/destinations`}>
+     <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 border-2 border-sky-500 px-12 font-medium text-white shadow-md hover:shadow-lg transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]">
+          See More
+        </button>
+     </Link> */}
+      </div>
+    </section>
+  );
+}
+
+export default Destinations;

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import TitleSection from "./TitleSection";
 import ReactSlider from "react-slider";
 import Link from "next/link";
+import Logo from "../Logo";
 
 const Room = () => {
     const [resorts, setResorts] = useState([]);
@@ -74,7 +75,7 @@ const Room = () => {
         setVisibleCount((prevCount) => prevCount + 6); 
     };
 
-    if (loading) return <div className="text-center">Loading...</div>;
+    if (loading) return <div className="h-screen w-full flex justify-center"><Logo/></div>;
     if (error) return <div className="text-center text-red-500">{error}</div>;
 
     return (
