@@ -1,41 +1,47 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ChevronsRight } from 'lucide-react';
 import Link from 'next/link';
+import Logo from './Logo';
+
+
 
 function TopResorts() {
-    const resorts = [
-      {
-        image:
-          'https://i.ibb.co/LYkf0pr/gondola-ride-in-autumn-in-kashmir-2023-10-18t174214-790-min.png',
-        hoverBackground:
-          'https://i.ibb.co.com/j85Gjdm/Paris1.jpg',
-        name: 'Paradise Resort',
-        role: 'Exclusive Luxury Stay',
-        description:
-          'Immerse yourself in a serene environment with breathtaking views, top-notch amenities, and unforgettable experiences.',
-      },
-      {
-        image:
-          'https://i.ibb.co/LYkf0pr/gondola-ride-in-autumn-in-kashmir-2023-10-18t174214-790-min.png',
-        hoverBackground:
-          'https://i.ibb.co.com/j85Gjdm/Paris1.jpg',
-        name: 'Emerald Bay Resort',
-        role: 'Premium Beachside Resort',
-        description:
-          'Feel the ocean breeze as you relax at the most luxurious beachside retreat with world-class dining and spa facilities.',
-      },
-      {
-        image:
-          'https://i.ibb.co/LYkf0pr/gondola-ride-in-autumn-in-kashmir-2023-10-18t174214-790-min.png',
-        hoverBackground:
-          'https://i.ibb.co.com/j85Gjdm/Paris1.jpg',
-        name: 'Mountain Bliss Retreat',
-        role: 'Nature’s Hidden Gem',
-        description:
-          'Escape to tranquility surrounded by lush forests and majestic mountains, offering an unparalleled nature experience.',
-      },
-    ];
+  const [resorts, setResorts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const resp = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/resort/api/resort-data`
+            );
+            if (!resp.ok) {
+                throw new Error("Failed to fetch resorts");
+            }
+            const data = await resp.json();
+            const sortedResorts = (data?.resorts || []).sort(
+              (a, b) => b.bookingCount - a.bookingCount
+            );
+            setResorts(sortedResorts|| []);
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+}, []);
+
+if (loading) return <div className="h-screen w-full flex justify-center"><Logo/></div>;
+if (error) return <p>Error: {error}</p>;
+
+const displayedResorts = resorts.slice(0, 6);
+    
   
     return (
       <section className="pt-16">
@@ -49,14 +55,14 @@ function TopResorts() {
         </div>
   
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 lg:px-16 md:px-8 px-4">
-          {resorts.map((resort, index) => (
+          {displayedResorts.map((resort, index) => (
             <div
               key={index}
               className="relative mt-4 h-[450px] overflow-hidden group mx-auto dark:bg-black bg-white dark:border-0 border rounded-md shadow-lg dark:text-white text-black flex flex-col"
             >
               <div className="w-full h-full">
                 <Image
-                  src={resort.image}
+                  src={resort.imageUrl}
                   alt={resort.name}
                   width={600}
                   height={600}
@@ -67,7 +73,7 @@ function TopResorts() {
               <article
                 className="p-8 w-full h-full absolute top-0 flex flex-col justify-end rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black"
                 style={{
-                  backgroundImage: `url(${resort.hoverBackground})`,
+                  backgroundImage: `url(${resort.bannerImage})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
@@ -75,9 +81,11 @@ function TopResorts() {
                 <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-300 space-y-2 bg-sky-500 p-6 rounded-md ">
                   <h1 className="md:text-2xl font-semibold">{resort.name}</h1>
                   <p className="sm:text-base text-sm">{resort.description}</p>
-                  <Link href="/resort"><button className="p-2  flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-all">
-                     See Details <ChevronsRight />
-                  </button></Link>
+                  <Link
+href={`/singleResort?email=${resort.email}`}
+className="p-2 flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-all"
+>
+  See Details <ChevronsRight /></Link>
                 </div>
               </article>
   

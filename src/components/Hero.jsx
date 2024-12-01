@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import Image from "next/image";
 import { TypeAnimation } from 'react-type-animation';
@@ -10,8 +10,11 @@ import {
   SliderContent,
   SliderWrapper,
 } from "@/components/progress-slider";
+import Logo from "./Logo";
+
 
 const items = [
+  
   {
     img: "https://i.ibb.co/xSBh6SN/landscape-railay-beach-sunrise-krabi-thailand-1.jpg",
     title: "Bridge",
@@ -38,7 +41,38 @@ const items = [
   },
 ];
 
+
+
 const Hero = () => {
+  const [counts, setCounts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/about/api`);
+            if (!resp.ok) {
+                throw new Error("Failed to fetch testimonials");
+            }
+            const data = await resp.json();
+            setCounts(data?.counts || []);
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+}, []);
+
+
+if (loading) return <div className="h-screen w-full flex justify-center"><Logo/></div>
+;
+if (error) return <p>Error: {error}</p>;
+
   return (
     <div className="h-screen relative flex flex-col items-center justify-center text-white overflow-hidden">
       <ProgressSlider vertical={false} activeSlider="bridge" className="absolute inset-0 z-0">
@@ -80,19 +114,19 @@ const Hero = () => {
         <div className="flex flex-wrap justify-center space-x-8 mt-8">
           <div className="text-center">
             <h2 className="lg:text-4xl md:text-4xl text-xl font-bold">
-              <CountUp start={0} end={120} duration={2.5} suffix="+" />
+              <CountUp start={0} end={counts.destinations} duration={2.5} suffix="+" />
             </h2>
             <p className="text-lg">Destinations</p>
           </div>
           <div className="text-center">
             <h2 className="lg:text-4xl md:text-4xl text-xl  font-bold">
-              <CountUp start={0} end={50000} duration={3} separator="," suffix="+" />
+              <CountUp start={0} end={counts.users} duration={3} separator="," suffix="+" />
             </h2>
             <p className="text-lg">Happy Travelers</p>
           </div>
           <div className="text-center">
             <h2 className="lg:text-4xl md:text-4xl text-xl  font-bold">
-              <CountUp start={0} end={5000} duration={2} separator="," suffix="+" />
+              <CountUp start={0} end={counts.testimonials} duration={2} separator="," suffix="+" />
             </h2>
             <p className="text-lg">Reviews</p>
           </div>
