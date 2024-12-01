@@ -11,6 +11,7 @@ import {
   SliderWrapper,
 } from "@/components/progress-slider";
 import Logo from "./Logo";
+import SearchBar from "./landingPage/Searchbar";
 
 
 const items = [
@@ -100,16 +101,17 @@ if (error) return <p>Error: {error}</p>;
           Discover hidden gems and popular spots with our curated travel guides.
         </p>
 
-        <div className="mt-8 flex justify-center items-center space-x-2">
+        {/* <div className="mt-8 flex justify-center items-center space-x-2">
           <input
             type="text"
-            placeholder="Search destinations..."
+            placeholder="Search resorts/destinations..."
             className="w-full max-w-md px-4 py-3 rounded-lg bg-white text-gray-800 placeholder-gray-500 shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
           <button className="h-full px-6 py-3 bg-sky-500 text-white rounded-lg">
             Search
           </button>
-        </div>
+        </div> */}
+        <SearchBar/>
 
         <div className="flex flex-wrap justify-center space-x-8 mt-8">
           <div className="text-center">
