@@ -8,43 +8,35 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper/modules";
+import Logo from "./Logo";
 
 const Testimonial = () => {
-  const staticReviews = [
-    {
-      _id: "1",
-      username: "Alice Johnson",
-      photoURL:
-        "https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg",
-      feedback:
-        "Absolutely loved the serene environment and cozy rooms. The booking process was smooth, and the staff were incredibly helpful!",
-      rating: 5,
-      createdAt: "2024-11-20T12:34:56Z",
-    },
-    {
-      _id: "2",
-      username: "Mark Rivera",
-      photoURL:
-        "https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg",
-      feedback:
-        "The resort exceeded my expectations! Amazing service and the location was breathtaking. Booking was seamless!",
-      rating: 4.5,
-      createdAt: "2024-11-18T15:22:11Z",
-    },
-    {
-      _id: "3",
-      username: "Sophia Lee",
-      photoURL:
-        "https://i.ibb.co/P6RfpHT/stylish-default-user-profile-photo-avatar-vector-illustration-664995-353.jpg",
-      feedback:
-        "An unforgettable experience! The resort had all the amenities I needed, and the tour website made it so easy to book.",
-      rating: 5,
-      createdAt: "2024-11-15T09:00:00Z",
-    },
-  ];
-
+  const [testimonials, setTestimonials] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [slidesPerPage, setSlidesPerPage] = useState(3);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resp = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/about/api`
+        );
+        if (!resp.ok) {
+          throw new Error("Failed to fetch testimonials");
+        }
+        const data = await resp.json();
+        setTestimonials(data?.testimonials || []);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const getBrowserWidth = () => {
     setScreenWidth(window.innerWidth);
@@ -65,6 +57,18 @@ const Testimonial = () => {
     }
   }, [screenWidth]);
 
+  if (loading) {
+    return (
+      <div className="h-screen w-full flex justify-center">
+        <Logo />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
       <div className="container mx-auto">
@@ -79,7 +83,7 @@ const Testimonial = () => {
           pagination={{ clickable: true }}
           modules={[FreeMode, Pagination]}
         >
-          {staticReviews.map((review) => (
+          {testimonials.map((review) => (
             <SwiperSlide key={review._id}>
               <div className="bg-white w-full p-8 rounded-md shadow-lg">
                 <Rating

@@ -1,34 +1,32 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import TitleSection from './TitleSection';
 
 const Testimonial = () => {
-    const testimonials = [
-        {
-            name: "John Doe",
-            designation: "CEO, Tech Solutions Inc.",
-            review: "The experience with this resort was beyond amazing. The service, amenities, and atmosphere were top-notch. We felt pampered from the moment we arrived.",
-            rating: 5,
-            image: "https://readymadeui.com/team-1.webp"
-        },
-        {
-            name: "Sarah Williams",
-            designation: "Marketing Director, Green Horizons Ltd.",
-            review: "A truly memorable stay! The spa and wellness facilities were exactly what I needed. The staff were incredibly attentive, and I will definitely be coming back.",
-            rating: 4,
-            image: "https://readymadeui.com/team-2.webp"
-        },
-        {
-            name: "Michael Johnson",
-            designation: "Founder, MJ Enterprises",
-            review: "Perfect getaway! The infinity pool and the picturesque surroundings made our stay unforgettable. Highly recommend for anyone looking for a luxurious yet relaxing escape.",
-            rating: 5,
-            image: "https://readymadeui.com/team-3.webp"
-        }
-    ];
-
+    const [testimonials, setTestimonials] = useState([]);
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/about/api`);
+                if (!resp.ok) {
+                    throw new Error("Failed to fetch testimonials");
+                }
+                const data = await resp.json();
+                setTestimonials(data?.testimonials || []);
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const nextTestimonial = () => {
         setCurrentTestimonial((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -37,6 +35,14 @@ const Testimonial = () => {
     const prevTestimonial = () => {
         setCurrentTestimonial((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
     };
+
+    if (loading) {
+        return <p>Loading testimonials...</p>;
+    }
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
 
     return (
         <section>
@@ -54,18 +60,17 @@ const Testimonial = () => {
                             <Image
                                 width={600}
                                 height={600}
-                                src={testimonials[currentTestimonial].image}
-                                alt={testimonials[currentTestimonial].name}
+                                src={testimonials[currentTestimonial].photoURL}
+                                alt={testimonials[currentTestimonial].username}
                                 className="w-28 h-28 rounded-full shadow-[0_2px_22px_-4px_rgba(93,96,127,0.6)] border-2 border-white"
                             />
                             <div className="mt-4">
-                                <h4 className="text-gray-800 text-base font-extrabold">{testimonials[currentTestimonial].name}</h4>
-                                {/* <p className="text-xs text-gray-500 mt-1">{testimonials[currentTestimonial].designation}</p> */}
+                                <h4 className="text-gray-800 text-base font-extrabold">{testimonials[currentTestimonial].username}</h4>
                             </div>
                         </div>
 
                         <div className="mt-6 text-center">
-                            <p className="text-sm leading-relaxed">{testimonials[currentTestimonial].review}</p>
+                            <p className="text-sm leading-relaxed">{testimonials[currentTestimonial].feedback}</p>
                         </div>
 
                         <div className="flex justify-center space-x-1.5 mt-4">
