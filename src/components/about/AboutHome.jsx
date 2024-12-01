@@ -16,7 +16,7 @@ export default function About() {
         <TravelPhilosophySection />
         <ImageCard />
 
-        <TeamSection />
+        {/* <TeamSection /> */}
 
       </div>
     
