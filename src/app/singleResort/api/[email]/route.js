@@ -2,8 +2,6 @@ import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
 
 export const GET = async (request, { params }) => {
-    console.log('called');
-    console.log(params.email);
     const db = await connectDB();
     const packagesCollection = db.collection('packages');
     
