@@ -68,23 +68,25 @@ const topDestinations = destinations.slice(0, 6);
                 className="h-full w-full scale-105 group-hover:scale-100 rounded-lg object-cover transition-all duration-300"
               />
             </figure>
-            <div className="absolute top-0 left-0 w-full h-full transition-all duration-300 bg-gradient-to-b from-[#2b2f3325] via-[#2832365b] to-[#0a52be] opacity-45"></div>
-            <article className="p-4 space-y-2 absolute -bottom-10 group-hover:bottom-0 transition-all duration-300">
-              <h1 className="text-xl lg:text-2xl font-semibold capitalize">
+            <div className="absolute top-0 left-0 w-full h-full transition-all duration-300 "></div>
+            <article className="p-4 space-y-2 absolute -bottom-10 group-hover:bottom-0 transition-all duration-300 ">
+              <div className="text-shadow"> 
+              <h1 className="text-xl lg:text-2xl font-semibold capitalize text-shadow">
                 {destination.name}
               </h1>
-              <p className="text-sm lg:text-base text-white">
+              <p className="text-sm lg:text-base text-white text-shadow">
                 {destination.description}
               </p>
               <a
                 href="#"
-                className="text-sm lg:text-base text-white  font-normal group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1 transition-all duration-300"
+                className="text-sm text-shadow lg:text-base text-white  font-normal group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1 transition-all duration-300"
               >
                 Explore
                 <span>
                   <ChevronsRight />
                 </span>
               </a>
+              </div>
             </article>
           </div>
         ))}
