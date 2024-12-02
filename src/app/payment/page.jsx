@@ -43,7 +43,8 @@ export default function Payment() {
     const response = await fetch('/payment/api', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: totalPrice, email: session?.user?.email,roomId:roomId }),
+      body: JSON.stringify({ amount: totalPrice, email: session?.user?.email,roomId:roomId ,checkInDate: checkInDate,
+        checkOutDate: checkOutDate,}),
     });
 
     const data = await response.json();

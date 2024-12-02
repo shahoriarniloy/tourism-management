@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
     try {
-        const { amount, email, roomId, packageId } = await req.json();
+        const { amount, email, roomId, packageId, checkInDate, checkOutDate } = await req.json();
 
         const successUrl = roomId
             ? `${process.env.NEXT_PUBLIC_API_URL}/paymentSuccess/roomBooking?session_id={CHECKOUT_SESSION_ID}&roomId=${roomId}`
@@ -25,11 +25,22 @@ export async function POST(req) {
                     quantity: 1,
                 },
             ],
+            
             customer_email: email,
             mode: "payment",
             success_url: successUrl,
             cancel_url: cancelUrl,
+            metadata: {
+                checkInDate:checkInDate,
+                checkOutDate:checkOutDate,
+                
+              },
+              
         });
+        console.log("Creating session with metadata:", {
+            checkInDate,
+            checkOutDate
+          });
 
         return NextResponse.json({ id: session.id });
     } catch (error) {
