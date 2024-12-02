@@ -44,7 +44,7 @@ const displayedResorts = resorts.slice(0, 6);
     
   
     return (
-      <section className="pt-16">
+      <section className="pt-16" >
         <div className="text-center mb-12 px-4">
           <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight text-black">
             Discover Top Resorts

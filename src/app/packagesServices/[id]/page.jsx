@@ -1,4 +1,5 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
@@ -8,6 +9,8 @@ const PackagePage = ({ params }) => {
   const [pac, setPac] = useState({});
   const [id, setId] = useState(null);
   const [loading, setLoading] = useState(true);
+  const session = useSession();
+
 
   useEffect(() => {
     const unwrapParams = async () => {
@@ -101,12 +104,16 @@ const PackagePage = ({ params }) => {
             </p>
           </div>
 
-          <button
+          {session.data ? (
+            <button
             onClick={handleBooking}
             className="text-white bg-green-500 px-6 py-2 mt-4 rounded-md"
           >
             Book Now
           </button>
+          ):("")}
+
+          
         </div>
       </div>
     </div>
