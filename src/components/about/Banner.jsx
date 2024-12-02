@@ -2,6 +2,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { MdDoubleArrow } from 'react-icons/md';
+import FeedbackForm from './FeedbackForm';
 
 const Banner = () => {
   const pathName = usePathname();
@@ -18,7 +19,7 @@ const Banner = () => {
   return (
     <div className="">
       <div
-        className="w-full h-48 text-center flex flex-col items-center justify-center"
+        className="w-full h-48 text-center flex flex-col items-center justify-center relative"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://i.ibb.co.com/4FrSZVd/panorama-shot-canal-lake-pukaki-twisel-surrounded-with-mountains-1.jpg)`,
           backgroundSize: 'cover',
@@ -33,6 +34,7 @@ const Banner = () => {
           Home <MdDoubleArrow />
           <span className="text-sky-500">{formattedPathName}</span>
         </h6>
+        <FeedbackForm></FeedbackForm>
       </div>
     </div>
   );
