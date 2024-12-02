@@ -1,4 +1,5 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
@@ -8,6 +9,8 @@ const RoomDetails = ({ params }) => {
   const [pac, setPac] = useState({});
   const [id, setId] = useState(null); 
   const [loading, setLoading] = useState(true);
+  const session = useSession();
+
 
   useEffect(() => {
     const unwrapParams = async () => {
@@ -83,12 +86,15 @@ const RoomDetails = ({ params }) => {
           <p className="text-gray-700 text-md mt-2">{pac?.description}</p>
           <p className="text-gray-700 text-md mt-2">{pac?.roomType} Room, {pac?.capacity} Person</p>
           <h2 className="text-md font-thin text-gray-700">Room No: {pac?.roomNo}</h2>
-          <button
+          {session.data ? (
+            <button
             onClick={handleBookNow}
             className="text-white bg-green-500 rounded-md px-6 py-2 mt-4"
           >
             Book Now
           </button>
+          ):("")}
+          
         </div>
       </div>
     </div>
