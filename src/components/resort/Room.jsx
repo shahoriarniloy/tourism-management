@@ -140,7 +140,7 @@ const Room = () => {
             >
               <div className="w-full h-full">
                 <Image
-                  src={resort.imageUrl}
+                  src={resort.bannerImage}
                   alt={resort.name}
                   width={600}
                   height={600}
@@ -151,13 +151,13 @@ const Room = () => {
               <article
                 className="p-8 w-full h-full absolute top-0 flex flex-col justify-end rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black"
                 style={{
-                  backgroundImage: `url(${resort.bannerImage})`,
+                  backgroundImage: `url(${resort.imageUrl})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
               >
                 <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-300 space-y-2 bg-sky-500 p-6 rounded-md ">
-                  <h1 className="md:text-2xl font-semibold">{resort.name}</h1>
+                  <h1 className="md:text-2xl font-semibold">{resort.resortName}</h1>
                   <p className="sm:text-base text-sm">{resort.description}</p>
                   <Link
 href={`/singleResort?email=${resort.email}`}
@@ -168,7 +168,7 @@ className="p-2 flex items-center gap-2 rounded-md text-white bg-sky-600 hover:bg
               </article>
   
               <article className="p-4 w-full absolute bottom-0 bg-gradient-to-t from-sky-500 to-transparent rounded-b-md opacity-100 group-hover:opacity-0 group-hover:-bottom-4 transition-all duration-300">
-                <h1 className="text-lg lg:text-xl font-semibold">{resort.name}</h1>
+                <h1 className="text-lg lg:text-xl font-semibold">{resort.resortName}</h1>
                 <p className="sm:text-base text-sm">{resort.role}</p>
               </article>
             </div>

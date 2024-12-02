@@ -62,7 +62,7 @@ const displayedResorts = resorts.slice(0, 6);
             >
               <div className="w-full h-full">
                 <Image
-                  src={resort.imageUrl}
+                  src={resort.bannerImage}
                   alt={resort.name}
                   width={600}
                   height={600}
@@ -73,7 +73,7 @@ const displayedResorts = resorts.slice(0, 6);
               <article
                 className="p-8 w-full h-full absolute top-0 flex flex-col justify-end rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black"
                 style={{
-                  backgroundImage: `url(${resort.bannerImage})`,
+                  backgroundImage: `url(${resort.imageUrl})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
