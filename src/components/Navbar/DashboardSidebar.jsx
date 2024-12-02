@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaMapMarkerAlt, FaList, FaCog, FaMapPin, FaRegListAlt, FaBoxOpen, FaClipboardList, FaBed, FaListUl, FaListAlt, FaTools } from "react-icons/fa";
+import { FaMapMarkerAlt, FaList, FaCog, FaMapPin, FaRegListAlt, FaBoxOpen, FaClipboardList, FaBed, FaListUl, FaListAlt, FaTools, FaBook } from "react-icons/fa";
 import { IoMenu, IoClose } from "react-icons/io5";
 
 const DashboardSidebar = () => {
@@ -66,6 +66,11 @@ const DashboardSidebar = () => {
         </div>
 
         <nav className="flex-1 p-4 space-y-4 h-screen ">
+        <Link href="/dashboard/bookings">
+            <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">
+              <FaBook className="mr-2 text-xl" /> Bookings
+            </span>
+          </Link>
 
           <Link href="/dashboard/addDestinations">
             <span className="flex items-center px-4 py-2 rounded hover:bg-sky-600 transition duration-300">

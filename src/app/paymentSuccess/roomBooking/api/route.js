@@ -1,53 +1,16 @@
-// import { connectDB } from "@/lib/connectDB";
-// import { NextResponse } from "next/server";
-
-// export const POST = async (req) => {
-//   const db = await connectDB();
-//   const bookingsCollection = await db.collection("bookings");
-
-//   try {
-//     const { email, amount, roomId } = await req.json();
-
-   
-
-
-//       let bookingData = {
-//         customer_email: email,
-//         amount: amount / 100, 
-//         status: "paid",
-//         RoomID:roomId,
-//         paymentStatus: session.payment_status, 
-//         bookingDate: new Date(),
-//         bookingType: "Room Booking", 
-//       };
-
-     
-
-//       const result = await bookingsCollection.insertOne(bookingData);
-
-//       return NextResponse.json(
-//         { message: "Booking Added Successfully!", result },
-//         { status: 201 }
-//       );
-    
-//   } catch (error) {
-//     console.error("Error adding Booking:", error);
-//     return NextResponse.json(
-//       { error: "Failed to add the booking." },
-//       { status: 500 }
-//     );
-//   }
-// };
 
 
 import { connectDB } from "@/lib/connectDB";
 
 import { NextResponse } from 'next/server';
+import { ObjectId } from 'mongodb';
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export async function GET(req) {
     const db = await connectDB();
   const bookingsCollection = await db.collection("bookings");
+  const roomsCollection = await db.collection("resortRoom");
   try {
     const url = new URL(req.url);
     const sessionId = url.searchParams.get('session_id'); 
@@ -58,6 +21,7 @@ export async function GET(req) {
     }
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
+
 
     if (session.payment_status === 'paid') {
       const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
@@ -70,13 +34,31 @@ export async function GET(req) {
         paymentStatus: session.payment_status,
         paymentMethod: paymentIntent.payment_method_types,
         roomId:roomId,
-        booking_type: "Room Booking"
+        booking_type: "Room Booking",
+        checkInDate: session.metadata.checkInDate,
+        checkOutDate: session.metadata.checkOutDate
         
       };
 
+      console.log(roomId);
 
-            const result = await bookingsCollection.insertOne(paymentData);
-
+      const result = await bookingsCollection.insertOne(paymentData);
+      const objectIdRoomId = new ObjectId(roomId);
+      const roomUpdateResult = await roomsCollection.updateOne(
+        { _id: objectIdRoomId },
+        {
+          $set: {
+            status: "Booked",
+            bookingInfo: {
+              checkInDate: session.metadata.checkInDate,
+              checkOutDate: session.metadata.checkOutDate,
+              customerEmail: session.customer_email,
+            },
+          },
+        },
+        { upsert: false }
+      );
+      
       return NextResponse.json(paymentData, { status: 200 });
     } else {
       return NextResponse.json({ error: 'Payment not successful' }, { status: 400 });
