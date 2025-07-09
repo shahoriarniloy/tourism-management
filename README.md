@@ -24,7 +24,7 @@ A modern web-based solution for seamless resort and destination bookings, guest 
 
 ## 📸 Preview
 
-![Tourism Management Screenshot](https://your-screenshot-link.com)
+![Tourism Management Screenshot](https://i.ibb.co/Z1SV1wwZ/Screenshot-2025-07-09-194656.png)
 
 ---
 
